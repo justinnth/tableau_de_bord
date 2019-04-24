@@ -12,15 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="app_homepage")
      */
     public function homepage()
     {
-        return new Response("Page d'accueil");
+        return $this->render('tableau_de_bord.html.twig');
     }
 
     /**
-     * @Route("/formateurs")
+     * @Route("/formateurs", name="app_formateurs")
      */
     public function formateurs()
     {
