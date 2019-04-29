@@ -3,6 +3,47 @@
 {% block title %} Tableau de bord {% endblock %}
 
 {% block body %}
-    <h1>Tableau de bord</h1>
-    <a href="{{ path('app_formateurs') }}">Formateurs</a>
+    <div class="jumbotron">
+        <h1 class="display-4">Bienvenue sur le tableau de bord!</h1>
+        <p class="lead">Vous êtes actuellement connecté en tant que ....</p>
+        <hr class="my-4">
+        <div class="container boxs">
+            <div class="box" style="cursor: pointer" onclick="window.location.href='{{ path('app_formateurs', {'id': 'all'}) }}'">
+                <div class="icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="content">
+                    <h3>Accéder aux formateurs</h3>
+                    <p>lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="content">
+                    <h3>Accéder aux formateurs</h3>
+                    <p>lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="content">
+                    <h3>Accéder aux formateurs</h3>
+                    <p>lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="content">
+                    <h3>Accéder aux formateurs</h3>
+                    <p>lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum</p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
