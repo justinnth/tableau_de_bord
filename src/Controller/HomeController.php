@@ -8,6 +8,7 @@ namespace App\Controller;
 use App\Entity\Formateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,12 +25,17 @@ class HomeController extends AbstractController
     /**
      * @Route("/formateurs/{id}", name="app_formateurs")
      */
-    public function formateur($id, EntityManagerInterface $em)
+    public function formateur($id, EntityManagerInterface $em, Request $request)
     {
         $repository = $em->getRepository(Formateur::class);
 
-        if ($id == 'all')
+        if ($id == 'all'){
             $formateur = $repository->findAll();
+            if($request->isMethod('POST')){
+                $nom=$request->get('nom');
+                $formateur=$repository->findBy(array("nom"=>$nom));
+            }
+        }
         else{
             /** @var Formateur $formateur */
             $formateur = $repository->findOneBy(['id' => $id]);
