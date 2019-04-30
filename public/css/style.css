@@ -1,7 +1,5 @@
-.boxs{
-    position: relative;
-    width: 1200px;
-    height: 800px;
+body{
+    background-color: #e9ecef;
 }
 
 .container .box{
@@ -37,12 +35,25 @@
 
 .container .box .icon .fas{
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 80px;
     transition: 0.5s;
     color: #fff;
+}
+
+.container .box .icon h1{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s;
+    color: #fff;
+}
+
+.container .box:hover .icon h1{
+    opacity: 0;
 }
 
 .container .box:hover .icon .fas{
