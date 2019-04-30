@@ -6,6 +6,14 @@
     <a href="{{ path('app_homepage') }}">Accueil</a>
     {% if formateurs is iterable %}
         <h1>Table des formateurs</h1>
+
+        <form method="POST">
+
+            nom <input type="text" name="nom">
+            <input type="submit" name="submit" value="recherche">
+
+        </form>
+
         {% for formateur in formateurs %}
             <a href="{{ path('app_formateurs', {'id': formateur.id}) }}">Vers moi</a>
             <p>Nom du formateur : {{ formateur.nom }}</p>
