@@ -4,11 +4,18 @@
 
 {% block body %}
     <a href="{{ path('app_homepage') }}">Accueil</a>
-    <h1>Table des formateurs</h1>
-    {% for formateur in formateurs %}
-        <p>Nom du formateur : {{ formateur.nom }}</p>
-        <p>Prénom du formateur : {{ formateur.prenom }}</p>
-        <p>Date de naissance : {{ formateur.dateDeNaissance|date("d-m-y") }}</p>
-        <hr>
-    {% endfor %}
+    {% if formateurs is iterable %}
+        <h1>Table des formateurs</h1>
+        {% for formateur in formateurs %}
+            <a href="{{ path('app_formateurs', {'id': formateur.id}) }}">Vers moi</a>
+            <p>Nom du formateur : {{ formateur.nom }}</p>
+            <p>Prénom du formateur : {{ formateur.prenom }}</p>
+            <p>Date de naissance : {{ formateur.dateDeNaissance|date("d-m-y") }}</p>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <h1>Formateur</h1>
+        <p>Nom : {{ formateurs.nom }}</p>
+        <p>Prénom : {{ formateurs.prenom }}</p>
+    {% endif %}
 {% endblock %}
