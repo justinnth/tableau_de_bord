@@ -6,10 +6,16 @@ namespace App\Controller;
 
 use App\Entity\Formateur;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class FormateurAdminController
+ * @package App\Controller
+ * @IsGranted("ROLE_ADMIN")
+ */
 class FormateurAdminController extends AbstractController
 {
     /**

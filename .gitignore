@@ -15,3 +15,5 @@
 ###< symfony/web-server-bundle ###
 
 .DS_Store
+
+.env
