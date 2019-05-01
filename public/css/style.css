@@ -90,27 +90,27 @@ body{
 }
 
 .container .box:nth-child(1) .icon{
-    background: #F5A619;
-}
-
-.container .box:nth-child(1){
-    background: #c17f07;
-}
-
-.container .box:nth-child(2) .icon{
     background: #B7432F;
 }
 
-.container .box:nth-child(2){
+.container .box:nth-child(1){
     background: #961b06;
 }
 
-.container .box:nth-child(3) .icon{
+.container .box:nth-child(2) .icon{
     background: #97BF22;
 }
 
-.container .box:nth-child(3){
+.container .box:nth-child(2){
     background: #769b09;
+}
+
+.container .box:nth-child(3) .icon{
+    background: #F5A619;
+}
+
+.container .box:nth-child(3){
+    background: #c17f07;
 }
 
 .container .box:nth-child(4) .icon{
@@ -120,3 +120,16 @@ body{
 .container .box:nth-child(4){
     background: #1282ba;
 }
+
+.listF{
+    margin-left: 1%;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid black;
+}
+
+.hover:hover{
+    background-color: #cdcfd3;
+}
+

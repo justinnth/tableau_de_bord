@@ -9,7 +9,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#">Liste des formateurs</a>
+            <a class="navbar-brand" href="{{ path('app_formateurs', {'id': 'all'}) }}">Liste des formateurs</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_homepage') }}">Accueil</a>
@@ -33,16 +33,27 @@
             </div>
         </div>
     </nav>
-
+    <hr>
     {% if formateurs is iterable %}
-
-        {% for formateur in formateurs %}
-            <a href="{{ path('app_formateurs', {'id': formateur.id}) }}">Vers moi</a>
-            <p>Nom du formateur : {{ formateur.nom }}</p>
-            <p>Prénom du formateur : {{ formateur.prenom }}</p>
-            <p>Date de naissance : {{ formateur.dateDeNaissance|date("d-m-y") }}</p>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        {% for formateur in formateurs %}
+                            {% set counter = ( counter | default(0) ) + 1 %}
+                            <td class="hover">
+                                <div class="listF" style="cursor: pointer" onclick="window.location.href='{{ path('app_formateurs', {'id': formateur.id}) }}'">
+                                    <h3><i class="far fa-id-card fa-3x"></i></h3>
+                                    <p> <h4>Nom:</h4> {{ formateur.nom }} </p>
+                                    <p> <h4>Prénom:</h4> {{ formateur.prenom }} </p>
+                                    <p> <h4>Née le:</h4> {{ formateur.dateDeNaissance|date("d-m-y") }}</p>
+                                </div>
+                            </td>
+                            {% if counter % 6 == 0 %}</tr><tr>{% endif %}
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
             <hr>
-        {% endfor %}
     {% else %}
         <h1>Formateur</h1>
         <p>Nom : {{ formateurs.nom }}</p>
