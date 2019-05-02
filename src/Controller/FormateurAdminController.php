@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class FormateurAdminController
  * @package App\Controller
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("ROLE_ADMIN_FORMATEUR")
  */
 class FormateurAdminController extends AbstractController
 {
