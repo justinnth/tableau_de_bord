@@ -32,8 +32,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # Autorise l'accès à la page login à un utilisateur anonyme
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Requiert l'authentifiactation sur la page de changement de mot de passe
+        - { path: ^/change-password, roles: IS_AUTHENTICATED_FULLY }
+        # Requiert l'authentification sur toutes les pages
+        - { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }
 
     encoders:
         App\Entity\User:
