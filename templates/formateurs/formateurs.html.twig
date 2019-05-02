@@ -3,38 +3,37 @@
 {% block title %} Table des formateurs {% endblock %}
 
 {% block body %}
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="{{ path('app_formateurs', {'id': 'all'}) }}">Liste des formateurs</a>
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_homepage') }}">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0" method="POST">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Chercher à partir du nom" aria-label="Chercher à partir du nom" name="nom">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-                    </form>
-                </li>
-            </ul>
-            <div class="btn-group">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                    a
-                </button>
-                <div class="dropdown-menu dropdown-menu-left">
-                    <button class="dropdown-item" type="button">Action</button>
-                    <button class="dropdown-item" type="button">Another action</button>
-                    <button class="dropdown-item" type="button">Something else here</button>
+    {% if formateurs is iterable %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="{{ path('app_formateurs', {'id': 'all'}) }}">Liste des formateurs</a>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_homepage') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="form-inline my-2 my-lg-0" method="POST">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Chercher à partir du nom" aria-label="Chercher à partir du nom" name="nom">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                        </form>
+                    </li>
+                </ul>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                        a
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left">
+                        <button class="dropdown-item" type="button">Action</button>
+                        <button class="dropdown-item" type="button">Another action</button>
+                        <button class="dropdown-item" type="button">Something else here</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    <hr>
-    {% if formateurs is iterable %}
+        </nav>
+        <hr>
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -53,10 +52,85 @@
                     </tr>
                 </tbody>
             </table>
-            <hr>
     {% else %}
-        <h1>Formateur</h1>
-        <p>Nom : {{ formateurs.nom }}</p>
-        <p>Prénom : {{ formateurs.prenom }}</p>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="{{ path('app_formateurs', {'id': 'all'}) }}">Liste des formateurs</a>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_homepage') }}">Accueil</a>
+                    </li>
+                </ul>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                        a
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left">
+                        <button class="dropdown-item" type="button">Action</button>
+                        <button class="dropdown-item" type="button">Another action</button>
+                        <button class="dropdown-item" type="button">Something else here</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <h1>Information sur le Formateur <b>{{ formateurs.prenom }} {{ formateurs.nom }}</b></h1>
+            Née le {{ formateurs.dateDeNaissance|date("d-m-y") }}
+            <hr>
+            <div class="row mb">
+                <div class="col">
+                   <b>Mail</b>: {{ formateurs.mail }}
+                </div>
+                <div class="col">
+                   <b>Téléphone</b>: {{ formateurs.telephone }}
+                </div>
+            </div>
+            <div class="row mb">
+                <div class="col">
+                    <b>Meilleur diplôme</b>: {{ formateurs.meilleurDiplome }}
+                </div>
+                <div class="col">
+                    {% if formateurs.salarie == 1 %}
+                        <p><b>Salarié</b>:
+                            <label for="oui">oui</label>
+                            <input type="checkbox" id="oui" name="oui" checked>
+                            <label for="non">non</label>
+                            <input type="checkbox" id="non" name="non">
+                        </p>
+                    {% else %}
+                        <p><b>Salarié</b>:
+                            <label for="oui">oui</label>
+                            <input type="checkbox" id="oui" name="oui">
+                            <label for="non">non</label>
+                            <input type="checkbox" id="non" name="non" checked>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+            <h2><b>Zone d'intervention du formateur</b></h2>
+            <div id="googleMap" style="width:100%;height:400px;"></div>
+            <script>
+                function myMap() {
+                    var mapProp= {
+                        center:new google.maps.LatLng(46.1667,-1.15),
+                        zoom:10,
+                    };
+                    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                }
+            </script>
+            <hr>
+            <h2><b>Fonctions d'intervention du formateur</b></h2>
+            {{ formateurs.typeFormations }}
+            <p><b>Fonction Actuelle</b>: {{ formateurs.fonctionActuelle }}</p>
+            <hr>
+            <h2><b>Planning du formateur</b></h2>
+
+        </div>
     {% endif %}
+    <hr>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYDcMOzzAU969z2ic1siiuODCpq92guw&callback=myMap"></script>
 {% endblock %}
