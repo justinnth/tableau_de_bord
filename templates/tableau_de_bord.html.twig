@@ -5,7 +5,7 @@
 {% block body %}
     <div class="jumbotron">
         <h1 class="display-4">Bienvenue sur le tableau de bord!</h1>
-        <p class="lead">Vous êtes actuellement connecté en tant que ....</p>
+        <p class="lead">Vous êtes actuellement connecté en tant que <strong>{{ app.user.username }}</strong></p>
         <hr class="my-4">
         <div class="container" style="display:table">
             <div class="box" style="cursor: pointer" onclick="window.location.href='{{ path('app_formateurs', {'id': 'all'}) }}'">

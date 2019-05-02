@@ -11,6 +11,13 @@
     </head>
     <body>
 
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+    <div class="alert alert-warning" style="margin-bottom: 0;">
+        Vous êtes actuellement connecté selon un autre utilisateur.
+        <a href="{{ path('app_homepage', {'_switch_user': '_exit'}) }}">Revenir à l'utilisateur original</a>
+    </div>
+    {% endif %}
+
     {% block body %}{% endblock %}
     <footer class="page-footer font-small blue">
         <div class="footer-copyright text-center py-3">© 2018 Copyright: Justin et Benjamin
