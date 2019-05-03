@@ -8,18 +8,21 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="{{ path('app_formateurs', {'id': 'all'}) }}">Liste des formateurs</a>
+            <a class="navbar-brand" href="{{ path('app_homepage') }}">
+                <img src="{{ asset('img/logo-header-petit.png') }}" width="auto" height="30" alt="logo">
+            </a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_homepage') }}">Tableau de bord</a>
-                </li>
                 {% if formateurs is iterable %}
-                <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0" method="POST">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Rechercher un formateur" aria-label="recherche" name="nom">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-                    </form>
-                </li>
+                    <li class="nav-item">
+                        <form class="form-inline my-2 my-lg-0" method="POST">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher un formateur" aria-label="recherche" name="nom">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_formateurs', {'id': 'all'}) }}">Liste des formateur</a>
+                    </li>
                 {% endif %}
             </ul>
             <div class="dropdown">
