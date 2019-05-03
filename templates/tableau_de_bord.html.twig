@@ -4,8 +4,33 @@
 
 {% block body %}
     <div class="jumbotron">
-        <h1 class="display-4">Bienvenue sur le tableau de bord!</h1>
-        <p class="lead">Vous êtes actuellement connecté en tant que <strong>{{ app.user.username }}</strong></p>
+        <div class="row">
+            <div class="col">
+                <h1 class="display-4">Bienvenue sur le tableau de bord!</h1>
+                <p class="lead">Vous êtes actuellement connecté en tant que
+                    <span class="badge badge-pill badge-success">
+                {% if app.user.username == "admin" %}
+                    administrateur
+                {% elseif app.user.username == "visu" %}
+                    visualisateur
+                {% elseif app.user.username == "user" %}
+                    utilisateur
+                {% elseif app.user.username == "formateur" %}
+                    formateur
+                {% endif %}
+            </span>
+                </p>
+            </div>
+            <div class="col col-lg-2">
+                <br>
+                <a href="{{ path('app_logout') }}">
+                    <button type="button" class="btn btn-labeled btn-danger">
+                        <span class="btn-label"><i class="fas fa-power-off"></i></span>
+                        Se déconnecter
+                    </button>
+                </a>
+            </div>
+        </div>
         <hr class="my-4">
         <div class="container" style="display:table">
             <div class="box" style="cursor: pointer" onclick="window.location.href='{{ path('app_formateurs', {'id': 'all'}) }}'">
