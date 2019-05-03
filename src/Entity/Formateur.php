@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -83,6 +85,16 @@ class Formateur
      * @ORM\Column(type="array")
      */
     private $formation_iperia = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EvenementPlanning", mappedBy="formateur")
+     */
+    private $evenementPlannings;
+
+    public function __construct()
+    {
+        $this->evenementPlannings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -243,5 +255,41 @@ class Formateur
         $this->formation_iperia = $formation_iperia;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|EvenementPlanning[]
+     */
+    public function getEvenementPlannings(): Collection
+    {
+        return $this->evenementPlannings;
+    }
+
+    public function addEvenementPlanning(EvenementPlanning $evenementPlanning): self
+    {
+        if (!$this->evenementPlannings->contains($evenementPlanning)) {
+            $this->evenementPlannings[] = $evenementPlanning;
+            $evenementPlanning->setFormateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvenementPlanning(EvenementPlanning $evenementPlanning): self
+    {
+        if ($this->evenementPlannings->contains($evenementPlanning)) {
+            $this->evenementPlannings->removeElement($evenementPlanning);
+            // set the owning side to null (unless already changed)
+            if ($evenementPlanning->getFormateur() === $this) {
+                $evenementPlanning->setFormateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNom()." ".$this->getPrenom();
     }
 }
