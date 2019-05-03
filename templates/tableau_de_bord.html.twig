@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="jumbotron">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col">
                 <h1 class="display-4">Bienvenue sur le tableau de bord!</h1>
                 <p class="lead">Vous êtes actuellement connecté en tant que
@@ -22,7 +22,6 @@
                 </p>
             </div>
             <div class="col col-lg-2">
-                <br>
                 <a href="{{ path('app_logout') }}">
                     <button type="button" class="btn btn-labeled btn-danger">
                         <span class="btn-label"><i class="fas fa-power-off"></i></span>
