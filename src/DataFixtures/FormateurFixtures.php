@@ -10,7 +10,7 @@ class FormateurFixtures extends BaseFixture
     protected function loadData(ObjectManager $manager)
     {
         $this->createMany(Formateur::class, 50, function (Formateur $formateur, $count){
-            $formateur->setNom($this->faker->name)
+            $formateur->setNom($this->faker->lastName)
                 ->setPrenom($this->faker->firstName)
                 ->setDateDeNaissance($this->faker->dateTimeThisCentury)
                 ->setMail($this->faker->email)

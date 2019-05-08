@@ -50,26 +50,28 @@
     </nav>
     {% if formateurs is iterable %}
         <hr>
-        <table class="table table-bordered">
-            <tbody>
-            <tr>
-                {% for formateur in formateurs %}
-                {% set counter = ( counter | default(0) ) + 1 %}
-                <td class="hover">
-                    <a href="{{ path('app_formateurs', {'id': formateur.id}) }}" style="text-decoration: none; color: inherit">
-                        <div class="listF formateurs" id="{{ formateur.id }}">
-                            <h3><i class="far fa-id-card fa-3x"></i></h3>
-                            <h4>Nom:</h4><p>{{ formateur.nom }}</p>
-                            <h4>Prénom:</h4><p>{{ formateur.prenom }}</p>
-                            <h4>Née le:</h4><p>{{ formateur.dateDeNaissance|date("d/m/Y") }}</p>
+        <div class="container-fluid">
+            <div class="text-center">
+                <p class="text-uppercase badge badge-secondary">Sélectionnez un formateur</p>
+            </div>
+
+            {% for row in formateurs|batch(4) %}
+                <div class="card-deck">
+                    {% for column in row %}
+                        <div class="card">
+                            <div class="card-body">
+                                <a href="{{ path('app_formateurs', {'id': column.id}) }}" class="stretched-link"></a>
+                                <i class="far fa-id-card fa-3x"></i>
+                                <h5 class="card-title">{{ column.nom }} {{ column.prenom }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Né.e le {{ column.dateDeNaissance|date('d/m/Y') }}</h6>
+                                <!--<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+                            </div>
                         </div>
-                    </a>
-                </td>
-                {% if counter % 6 == 0 %}</tr><tr>{% endif %}
-                {% endfor %}
-            </tr>
-            </tbody>
-        </table>
+                    {% endfor %}
+                </div>
+                <br>
+            {% endfor %}
+        </div>
     {% else %}
         <hr>
         <div class="container">
