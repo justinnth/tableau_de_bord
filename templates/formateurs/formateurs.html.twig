@@ -124,7 +124,7 @@
             <p><b>Fonction actuelle :</b> {{ formateurs.fonctionActuelle }}</p>
             <hr>
             <h2><b>Planning du formateur</b></h2>
-            <a href="{{ path('evenement_planning_new') }}">Créer un nouvel évènement</a>
+            <a class="btn btn-success" href="{{ path('evenement_planning_new') }}">Créer un nouvel évènement</a>
             {% include '@Calendar/calendar.html' %}
         </div>
     {% endif %}
@@ -139,6 +139,7 @@
         <script src="https://fullcalendar.io/releases/interaction/4.0.1/main.min.js"></script>
         <script src="https://fullcalendar.io/releases/daygrid/4.0.1/main.min.js"></script>
         <script src="https://fullcalendar.io/releases/timegrid/4.0.1/main.min.js"></script>
+        <script src='https://fullcalendar.io/releases/core/4.0.1/locales/fr.js'></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', () => {
                 var calendarEl = document.getElementById('calendar-holder');
@@ -167,6 +168,8 @@
                     timeZone: "UTC"
                 });
                 calendar.render();
+
+                calendar.setOption('locale', 'fr');
             });
         </script>
     {% endif %}
