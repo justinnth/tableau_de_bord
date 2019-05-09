@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Table des formations {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://fullcalendar.io/releases/core/4.0.1/main.min.css">
+    <link rel="stylesheet" href="https://fullcalendar.io/releases/daygrid/4.0.1/main.min.css">
+    <link rel="stylesheet" href="https://fullcalendar.io/releases/timegrid/4.0.1/main.min.css">
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="{{ path('app_homepage') }}">
+                <img src="{{ asset('img/logo-header-petit.png') }}" width="auto" height="30" alt="logo">
+            </a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_formations', {'id': 'all'}) }}">Liste des formations</a>
+                    </li>
+            </ul>
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('app_account') }}">
+                        <i class="fas fa-user"></i> Mon compte
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">
+                        <i class="fas fa-power-off"></i> Se déconnecter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% if formations is iterable %}
+        <hr>
+        <div class="container-fluid">
+            <div class="text-center">
+                <p class="text-uppercase badge badge-secondary">Sélectionnez une formation</p>
+            </div>
+
+            {% for row in formations|batch(4) %}
+                <div class="card-deck">
+                    {% for column in row %}
+                        <div class="card hover">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <a href="{{ path('app_formations', {'id': column.id}) }}" class="stretched-link"></a>
+                                        <h5 class="mt-0 mb-1">Ab recusandae libero quasi voluptatem eos qui. Molestias provident</h5>{# Titre formation en dur pcq le type titre dans les fixtures voila quoi #}
+                                        <h6 style="margin-top: 10px" class="card-subtitle mb-2 text-muted">Référence: {{ column.reference }}</h6>
+                                    </div>
+                                    <i class="fas fa-file fa-3x"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+    {% else %}
+        <hr>
+        <div class="container formations">
+            <h1>Information sur la formation : <b>Ab recusandae libero quasi voluptatem eos qui. Molestias providen</b></h1> {# Titre formation en dur pcq le type titre dans les fixtures voila quoi #}
+            <p>Référence: {{ formations.reference }}</p>
+            <hr>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Durée:</b> {{ formations.duree }}h</li>
+                <li class="list-group-item"><b>Pédagogie:</b> {{ formations.pedagogie }}</li>
+                <li class="list-group-item"><b>Public visé:</b> {{ formations.publicVise }}</li>
+                <li class="list-group-item"><b>Formateur:</b> {{ formations.formateur }}</li>
+                <li class="list-group-item"><b>Prérequis:</b> {{ formations.prerequis }}</li>
+                <li class="list-group-item"><b>Lieu:</b> {{ formations.lieu }}</li>
+            </ul>
+            <hr>
+            {% if formations.trameARealiser == 1 and formations.trameValiderIperia == 1 %}
+                <div style="background-color:#b9d664; border-radius: 10px">
+                    <p><b>Trame à réaliser</b>:
+                        <label for="oui">oui</label>
+                        <input type="checkbox" id="oui" name="oui" checked>
+                        <label for="non">non</label>
+                        <input type="checkbox" id="non" name="non">
+                    </p>
+                    <p><b>Ipéria Validé</b>:
+                        <label for="oui">oui</label>
+                        <input type="checkbox" id="oui" name="oui" checked>
+                        <label for="non">non</label>
+                        <input type="checkbox" id="non" name="non">
+                    </p>
+                </div>
+            {% elseif formations.trameARealiser == 1 and formations.trameValiderIperia == 0 %}
+                <div style="background-color:#f7bf5b; border-radius: 10px">
+                    <p><b>Trame à réaliser</b>:
+                        <label for="oui">oui</label>
+                        <input type="checkbox" id="oui" name="oui" checked>
+                        <label for="non">non</label>
+                        <input type="checkbox" id="non" name="non">
+                    </p>
+                    <p><b>Ipéria Validé</b>:
+                        <label for="oui">oui</label>
+                        <input type="checkbox" id="oui" name="oui" >
+                        <label for="non">non</label>
+                        <input type="checkbox" id="non" name="non" checked>
+                    </p>
+                </div>
+            {% elseif formations.trameARealiser == 0 and formations.trameValiderIperia == 1 %}
+                <div style="background-color:#f7bf5b; border-radius: 10px">
+                    <p><b>Trame à réaliser</b>:
+                        <label for="oui">oui</label>
+                        <input type="checkbox" id="oui" name="oui">
+                        <label for="non">non</label>
+                        <input type="checkbox" id="non" name="non" checked>
+                    </p>
+                    <p><b>Ipéria Validé</b>:
+                        <label for="oui">oui</label>
+                        <input type="checkbox" id="oui" name="oui" checked>
+                        <label for="non">non</label>
+                        <input type="checkbox" id="non" name="non">
+                    </p>
+                </div>
+            {% else %}
+                <div style="background-color:#e8816f; border-radius: 10px">
+                    <p><b>Trame à réaliser</b>:
+                        <label for="oui">oui</label>
+                        <input type="checkbox" id="oui" name="oui">
+                        <label for="non">non</label>
+                        <input type="checkbox" id="non" name="non" checked>
+                    </p>
+                    <p><b>Ipéria Validé</b>:
+                        <label for="oui">oui</label>
+                        <input type="checkbox" id="oui" name="oui">
+                        <label for="non">non</label>
+                        <input type="checkbox" id="non" name="non" checked>
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

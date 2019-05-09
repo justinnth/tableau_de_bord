@@ -6,6 +6,7 @@ namespace App\Controller;
 
 
 use App\Entity\Formateur;
+use App\Entity\Formation;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,6 +49,33 @@ class HomeController extends BaseController
 
         return $this->render('formateurs/formateurs.html.twig', [
             'formateurs' => $formateur
+        ]);
+    }
+
+    /**
+     * @Route("/formations/{id}", name="app_formations")
+     */
+    public function formation($id, EntityManagerInterface $em, Request $request)
+    {
+        $repository = $em->getRepository(Formation::class);
+
+        if ($id == 'all'){
+            $formation = $repository->findAll();
+            if($request->isMethod('POST')){
+                $nom=$request->get('nom');
+                $formation=$repository->findBy(array("nom"=>$nom));
+            }
+        }
+        else{
+            /** @var Formation $formation */
+            $formation = $repository->findOneBy(['id' => $id]);
+        }
+
+        if (!$formation)
+            throw $this->createNotFoundException(sprintf("Aucune formation pour l'id : %s", $id));
+
+        return $this->render('formations/formations.html.twig', [
+            'formations' => $formation
         ]);
     }
 }

@@ -28,7 +28,7 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_formateurs', {'id': 'all'}) }}">Liste des formateur</a>
+                        <a class="nav-link" href="{{ path('app_formateurs', {'id': 'all'}) }}">Liste des formateurs</a>
                     </li>
                 {% endif %}
             </ul>
@@ -58,7 +58,7 @@
             {% for row in formateurs|batch(4) %}
                 <div class="card-deck">
                     {% for column in row %}
-                        <div class="card">
+                        <div class="card hover">
                             <div class="card-body">
                                 <a href="{{ path('app_formateurs', {'id': column.id}) }}" class="stretched-link"></a>
                                 <i class="far fa-id-card fa-3x"></i>
