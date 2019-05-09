@@ -1,4 +1,24 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="form-group">
+    {{ form_label(form.title, 'Intitulé de l\'évènement') }}
+    {{ form_widget(form.title, {
+        'attr': {
+            'placeholder': 'Entrez un titre'
+        }
+    }) }}
+    {{ form_help(form.title) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.beginAt, "Début") }}
+    {{ form_widget(form.beginAt) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.endAt, "Fin") }}
+    {{ form_widget(form.endAt) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.formateur) }}
+    {{ form_widget(form.formateur) }}
+</div>
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Ajouter un évènement dans le planning') }}</button>
 {{ form_end(form) }}

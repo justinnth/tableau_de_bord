@@ -92,7 +92,7 @@ class Formateur
     private $evenementPlannings;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="formateur")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="formateurs")
      */
     private $formations;
 
