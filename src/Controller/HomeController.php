@@ -58,12 +58,13 @@ class HomeController extends BaseController
     public function formation($id, EntityManagerInterface $em, Request $request)
     {
         $repository = $em->getRepository(Formation::class);
+        $repositoryFormateur = $em->getRepository(Formateur::class);
 
         if ($id == 'all'){
             $formation = $repository->findAll();
             if($request->isMethod('POST')){
-                $nom=$request->get('nom');
-                $formation=$repository->findBy(array("nom"=>$nom));
+                $nom=$request->get('formation');
+                $formation=$repository->findBy(array("titre"=>$nom));
             }
         }
         else{

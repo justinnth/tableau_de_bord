@@ -2,13 +2,6 @@
 
 {% block title %} Table des formations {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="https://fullcalendar.io/releases/core/4.0.1/main.min.css">
-    <link rel="stylesheet" href="https://fullcalendar.io/releases/daygrid/4.0.1/main.min.css">
-    <link rel="stylesheet" href="https://fullcalendar.io/releases/timegrid/4.0.1/main.min.css">
-{% endblock %}
-
 {% block body %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,9 +12,18 @@
                 <img src="{{ asset('img/logo-header-petit.png') }}" width="auto" height="30" alt="logo">
             </a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                {% if formations is iterable %}
+                    <li class="nav-item">
+                        <form class="form-inline my-2 my-lg-0" method="POST">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher une formation" aria-label="recherche" name="formation">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                        </form>
+                    </li>
+                {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_formations', {'id': 'all'}) }}">Liste des formations</a>
                     </li>
+                {% endif %}
             </ul>
             <div class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,8 +56,8 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <a href="{{ path('app_formations', {'id': column.id}) }}" class="stretched-link"></a>
-                                        <h5 class="mt-0 mb-1">Ab recusandae libero quasi voluptatem eos qui. Molestias provident</h5>{# Titre formation en dur pcq le type titre dans les fixtures voila quoi #}
-                                        <h6 style="margin-top: 10px" class="card-subtitle mb-2 text-muted">Référence: {{ column.reference }}</h6>
+                                        <h5 class="mt-0 mb-1">{{ column.titre }}</h5>{# Titre formation en dur pcq le type titre dans les fixtures voila quoi #}
+                                        <h6 style="margin-top: 10px" class="card-subtitle mb-2 text-muted">Référence : {{ column.reference }}</h6>
                                     </div>
                                     <i class="fas fa-file fa-3x"></i></h6>
                                 </div>
@@ -70,78 +72,49 @@
         <hr>
         <div class="container formations">
             <h1>Information sur la formation : <b>Ab recusandae libero quasi voluptatem eos qui. Molestias providen</b></h1> {# Titre formation en dur pcq le type titre dans les fixtures voila quoi #}
-            <p>Référence: {{ formations.reference }}</p>
+            <p>Référence : {{ formations.reference }}</p>
             <hr>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><b>Durée:</b> {{ formations.duree }}h</li>
-                <li class="list-group-item"><b>Pédagogie:</b> {{ formations.pedagogie }}</li>
-                <li class="list-group-item"><b>Public visé:</b> {{ formations.publicVise }}</li>
-                <li class="list-group-item"><b>Formateur:</b> {{ formations.formateur }}</li>
-                <li class="list-group-item"><b>Prérequis:</b> {{ formations.prerequis }}</li>
-                <li class="list-group-item"><b>Lieu:</b> {{ formations.lieu }}</li>
+                <li class="list-group-item"><b>Durée :</b> {{ formations.duree }}h</li>
+                <li class="list-group-item"><b>Pédagogie :</b> {{ formations.pedagogie }}</li>
+                <li class="list-group-item"><b>Public visé :</b> {{ formations.publicVise }}</li>
+                <li class="list-group-item">
+                    <b>Formateur :</b>
+                    {% for formateur in formations.formateurs %}
+                        {{ formateur.nom }} {{ formateur.prenom }}
+                    {% endfor %}
+                </li>
+                <li class="list-group-item"><b>Prérequis :</b> {{ formations.prerequis }}</li>
+                <li class="list-group-item"><b>Lieu :</b> {{ formations.lieu }}</li>
             </ul>
+
             <hr>
-            {% if formations.trameARealiser == 1 and formations.trameValiderIperia == 1 %}
-                <div style="background-color:#b9d664; border-radius: 10px">
-                    <p><b>Trame à réaliser</b>:
-                        <label for="oui">oui</label>
-                        <input type="checkbox" id="oui" name="oui" checked>
-                        <label for="non">non</label>
-                        <input type="checkbox" id="non" name="non">
-                    </p>
-                    <p><b>Ipéria Validé</b>:
-                        <label for="oui">oui</label>
-                        <input type="checkbox" id="oui" name="oui" checked>
-                        <label for="non">non</label>
-                        <input type="checkbox" id="non" name="non">
-                    </p>
-                </div>
-            {% elseif formations.trameARealiser == 1 and formations.trameValiderIperia == 0 %}
-                <div style="background-color:#f7bf5b; border-radius: 10px">
-                    <p><b>Trame à réaliser</b>:
-                        <label for="oui">oui</label>
-                        <input type="checkbox" id="oui" name="oui" checked>
-                        <label for="non">non</label>
-                        <input type="checkbox" id="non" name="non">
-                    </p>
-                    <p><b>Ipéria Validé</b>:
-                        <label for="oui">oui</label>
-                        <input type="checkbox" id="oui" name="oui" >
-                        <label for="non">non</label>
-                        <input type="checkbox" id="non" name="non" checked>
-                    </p>
-                </div>
-            {% elseif formations.trameARealiser == 0 and formations.trameValiderIperia == 1 %}
-                <div style="background-color:#f7bf5b; border-radius: 10px">
-                    <p><b>Trame à réaliser</b>:
-                        <label for="oui">oui</label>
-                        <input type="checkbox" id="oui" name="oui">
-                        <label for="non">non</label>
-                        <input type="checkbox" id="non" name="non" checked>
-                    </p>
-                    <p><b>Ipéria Validé</b>:
-                        <label for="oui">oui</label>
-                        <input type="checkbox" id="oui" name="oui" checked>
-                        <label for="non">non</label>
-                        <input type="checkbox" id="non" name="non">
-                    </p>
-                </div>
-            {% else %}
-                <div style="background-color:#e8816f; border-radius: 10px">
-                    <p><b>Trame à réaliser</b>:
-                        <label for="oui">oui</label>
-                        <input type="checkbox" id="oui" name="oui">
-                        <label for="non">non</label>
-                        <input type="checkbox" id="non" name="non" checked>
-                    </p>
-                    <p><b>Ipéria Validé</b>:
-                        <label for="oui">oui</label>
-                        <input type="checkbox" id="oui" name="oui">
-                        <label for="non">non</label>
-                        <input type="checkbox" id="non" name="non" checked>
-                    </p>
-                </div>
-            {% endif %}
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <b>Trame à réaliser :</b>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="trameOptions" id="trameOui" value="trameOui" {% if formations.trameARealiser %} checked {% endif %}>
+                        <label class="form-check-label" for="trameOui">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="trameOptions" id="trameNon" value="trameNon" {% if not formations.trameARealiser %} checked {% endif %}>
+                        <label class="form-check-label" for="trameNon">Non</label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <b>Ipéria validé :</b>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="iperiaOptions" id="iperiaOui" value="iperiaOui" {% if formations.trameValiderIperia %} checked {% endif %}>
+                        <label class="form-check-label" for="iperiaOui">Oui</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="iperiaOptions" id="iperiaNon" value="iperiaNon" {% if not formations.trameValiderIperia %} checked {% endif %}>
+                        <label class="form-check-label" for="iperiaNon">Non</label>
+                    </div>
+                </li>
+            </ul>
         </div>
     {% endif %}
+    <hr>
 {% endblock %}

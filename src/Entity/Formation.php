@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FormationRepository")
  */
 class Formation
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -40,11 +45,6 @@ class Formation
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $publicVise;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $formateur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -85,6 +85,16 @@ class Formation
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $trameValiderIperia;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Formateur", inversedBy="formations")
+     */
+    private $formateurs;
+
+    public function __construct()
+    {
+        $this->formateurs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -151,14 +161,9 @@ class Formation
         return $this;
     }
 
-    public function getFormateur(): ?string
+    public function setformateurs(string $formateurs): self
     {
-        return $this->formateur;
-    }
-
-    public function setFormateur(string $formateur): self
-    {
-        $this->formateur = $formateur;
+        $this->formateurs = $formateurs;
 
         return $this;
     }
@@ -255,6 +260,32 @@ class Formation
     public function setTrameValiderIperia(?bool $trameValiderIperia): self
     {
         $this->trameValiderIperia = $trameValiderIperia;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Formateur[]
+     */
+    public function getformateurs(): Collection
+    {
+        return $this->formateurs;
+    }
+
+    public function addFormateur(Formateur $formateur): self
+    {
+        if (!$this->formateurs->contains($formateur)) {
+            $this->formateurs[] = $formateur;
+        }
+
+        return $this;
+    }
+
+    public function removeFormateur(Formateur $formateur): self
+    {
+        if ($this->formateurs->contains($formateur)) {
+            $this->formateurs->removeElement($formateur);
+        }
 
         return $this;
     }
