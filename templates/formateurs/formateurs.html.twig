@@ -120,7 +120,9 @@
             </script>
             <hr>
             <h2><b>Fonctions d'intervention du formateur</b></h2>
-            {{ formateurs.typeFormations }}
+            {% for typeFormation in formateurs.typeFormations %}
+            {{ typeFormation['formation'] }}
+            {% endfor %}
             <p><b>Fonction actuelle :</b> {{ formateurs.fonctionActuelle }}</p>
             <hr>
             <h2><b>Planning du formateur</b></h2>
@@ -151,9 +153,7 @@
                         {
                             url: "{{ path('fc_load_events') }}",
                             type: "POST",
-                            data: {
-                                filters: {},
-                            },
+                            data: {},
                             error: () => {
                                 // alert("There was an error while fetching FullCalendar!");
                             },
@@ -165,7 +165,8 @@
                         right: 'timeGridWeek,timeGridDay,dayGridMonth',
                     },
                     plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
-                    timeZone: "UTC"
+                    timeZone: "UTC",
+                    filters: 'test'
                 });
                 calendar.render();
 

@@ -32,6 +32,8 @@ class CalendarListener
         $end = $calendar->getEnd();
         $filters = $calendar->getFilters();
 
+        dd($calendar);
+
 
         $evenements = $this->evenementPlanningRepository
             ->createQueryBuilder('evenement_planning')
@@ -39,7 +41,7 @@ class CalendarListener
             ->andWhere('evenement_planning.formateur = :formateur')
             ->setParameter('start', $start->format('Y-m-d H:i:s'))
             ->setParameter('end', $end->format('Y-m-d H:i:s'))
-            ->setParameter('formateur', 151)
+            ->setParameter('formateur', 1)
             ->getQuery()
             ->getResult();
 

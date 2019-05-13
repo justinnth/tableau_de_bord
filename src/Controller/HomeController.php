@@ -9,6 +9,7 @@ use App\Entity\Formateur;
 use App\Entity\Formation;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -27,6 +28,10 @@ class HomeController extends BaseController
 
     /**
      * @Route("/formateurs/{id}", name="app_formateurs")
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
      */
     public function formateur($id, EntityManagerInterface $em, Request $request)
     {
@@ -54,11 +59,14 @@ class HomeController extends BaseController
 
     /**
      * @Route("/formations/{id}", name="app_formations")
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
      */
     public function formation($id, EntityManagerInterface $em, Request $request)
     {
         $repository = $em->getRepository(Formation::class);
-        $repositoryFormateur = $em->getRepository(Formateur::class);
 
         if ($id == 'all'){
             $formation = $repository->findAll();

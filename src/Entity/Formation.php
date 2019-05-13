@@ -91,9 +91,20 @@ class Formation
      */
     private $formateurs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EvenementPlanning", mappedBy="formation")
+     */
+    private $evenementPlannings;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $numero_cpf;
+
     public function __construct()
     {
         $this->formateurs = new ArrayCollection();
+        $this->evenementPlannings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -286,6 +297,49 @@ class Formation
         if ($this->formateurs->contains($formateur)) {
             $this->formateurs->removeElement($formateur);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|EvenementPlanning[]
+     */
+    public function getEvenementPlannings(): Collection
+    {
+        return $this->evenementPlannings;
+    }
+
+    public function addEvenementPlanning(EvenementPlanning $evenementPlanning): self
+    {
+        if (!$this->evenementPlannings->contains($evenementPlanning)) {
+            $this->evenementPlannings[] = $evenementPlanning;
+            $evenementPlanning->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvenementPlanning(EvenementPlanning $evenementPlanning): self
+    {
+        if ($this->evenementPlannings->contains($evenementPlanning)) {
+            $this->evenementPlannings->removeElement($evenementPlanning);
+            // set the owning side to null (unless already changed)
+            if ($evenementPlanning->getFormation() === $this) {
+                $evenementPlanning->setFormation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNumeroCpf(): ?int
+    {
+        return $this->numero_cpf;
+    }
+
+    public function setNumeroCpf(?int $numero_cpf): self
+    {
+        $this->numero_cpf = $numero_cpf;
 
         return $this;
     }

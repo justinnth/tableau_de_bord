@@ -17,6 +17,8 @@ class EvenementPlanningController extends AbstractController
 {
     /**
      * @Route("/", name="evenement_planning_index", methods={"GET"})
+     * @param EvenementPlanningRepository $evenementPlanningRepository
+     * @return Response
      */
     public function index(EvenementPlanningRepository $evenementPlanningRepository): Response
     {
@@ -27,6 +29,8 @@ class EvenementPlanningController extends AbstractController
 
     /**
      * @Route("/new", name="evenement_planning_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class EvenementPlanningController extends AbstractController
 
     /**
      * @Route("/{id}", name="evenement_planning_show", methods={"GET"})
+     * @param EvenementPlanning $evenementPlanning
+     * @return Response
      */
     public function show(EvenementPlanning $evenementPlanning): Response
     {
@@ -60,6 +66,9 @@ class EvenementPlanningController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="evenement_planning_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param EvenementPlanning $evenementPlanning
+     * @return Response
      */
     public function edit(Request $request, EvenementPlanning $evenementPlanning): Response
     {
@@ -82,6 +91,9 @@ class EvenementPlanningController extends AbstractController
 
     /**
      * @Route("/{id}", name="evenement_planning_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param EvenementPlanning $evenementPlanning
+     * @return Response
      */
     public function delete(Request $request, EvenementPlanning $evenementPlanning): Response
     {

@@ -19,8 +19,14 @@ class FormateurFixtures extends BaseFixture
                 ->setSalarie($this->faker->boolean(70))
                 ->setFonctionActuelle($this->faker->text)
                 ->setDomaineExpertise($this->faker->text)
+                ->setTypeFormations(array(
+                    array('date' => $this->faker->dateTimeBetween('-3 years 100 days', 'now'), 'formation' => 1),
+                    array('date' => $this->faker->dateTimeBetween('-3 years 100 days', 'now'), 'formation' => 1),
+                    array('date' => $this->faker->dateTimeBetween('-3 years 100 days', 'now'), 'formation' => 1),
+                    array('date' => $this->faker->dateTimeBetween('-3 years 100 days', 'now'), 'formation' => 1),
+                    array('date' => $this->faker->dateTimeBetween('-3 years 100 days', 'now'), 'formation' => 1)
+                ))
                 ->setModeAcquisition($this->faker->text)
-                ->setTypeFormations($this->faker->text)
                 ->setZoneExecution($this->faker->shuffleArray([0, 10000]))
                 ->setFormationIperia($this->faker->shuffleArray([0, 10000]));
         });

@@ -37,6 +37,11 @@ class EvenementPlanning
      */
     private $formateur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Formation", inversedBy="evenementPlannings")
+     */
+    private $formation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class EvenementPlanning
     public function setFormateur(?Formateur $formateur): self
     {
         $this->formateur = $formateur;
+
+        return $this;
+    }
+
+    public function getFormation(): ?Formation
+    {
+        return $this->formation;
+    }
+
+    public function setFormation(?Formation $formation): self
+    {
+        $this->formation = $formation;
 
         return $this;
     }

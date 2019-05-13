@@ -72,7 +72,7 @@ class Formateur
     private $mode_acquisition;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="array")
      */
     private $type_formations;
 
@@ -227,12 +227,12 @@ class Formateur
         return $this;
     }
 
-    public function getTypeFormations(): ?string
+    public function getTypeFormations(): ?array
     {
         return $this->type_formations;
     }
 
-    public function setTypeFormations(string $type_formations): self
+    public function setTypeFormations(array $type_formations): self
     {
         $this->type_formations = $type_formations;
 
