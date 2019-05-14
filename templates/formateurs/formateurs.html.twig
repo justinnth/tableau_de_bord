@@ -51,6 +51,17 @@
     {% if formateurs is iterable %}
         <hr>
         <div class="container-fluid">
+            <ul class="list-group list-group-flush">
+                {% for formateur in formateurs %}
+                    {% for typeFormation in formateur.typeFormations %}
+                        {% if typeFormation['date'] <= date('-3years') %}
+                            <li class="list-group-item warning">
+                                <p><i class="fas fa-exclamation-triangle"></i> le formateur {{ formateur.prenom }} {{ formateur.nom }} n'est pas formé sur les 3 dernières années pour la formation {{ typeFormation['formation'] }}</p>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
             <div class="text-center">
                 <p class="text-uppercase badge badge-secondary">Sélectionnez un formateur</p>
             </div>
@@ -74,16 +85,23 @@
         </div>
     {% else %}
         <hr>
+        {% for typeFormation in formateurs.typeFormations %}
+            {% if typeFormation['date'] <= date('-3years') %}
+                <li class="list-group-item warning" style="margin-bottom: 10px">
+                    <p><i class="fas fa-exclamation-triangle"></i> le formateur {{ formateurs.nom }} {{ formateurs.prenom }} n'est pas formé sur les 3 dernières années pour la formation {{ typeFormation['formation'] }}</p>
+                </li>
+            {% endif %}
+        {% endfor %}
         <div class="container">
             <h1>Information sur le formateur : <b>{{ formateurs.prenom }} {{ formateurs.nom }}</b></h1>
             Née le {{ formateurs.dateDeNaissance|date('d F Y') }}
             <hr>
             <div class="row mb">
                 <div class="col">
-                   <b>Adresse e-mail :</b> {{ formateurs.mail }}
+                    <b>Adresse e-mail :</b> {{ formateurs.mail }}
                 </div>
                 <div class="col">
-                   <b>Téléphone :</b> {{ formateurs.telephone }}
+                    <b>Téléphone :</b> {{ formateurs.telephone }}
                 </div>
             </div>
             <div class="row mb">
@@ -120,9 +138,6 @@
             </script>
             <hr>
             <h2><b>Fonctions d'intervention du formateur</b></h2>
-            {% for typeFormation in formateurs.typeFormations %}
-            {{ typeFormation['formation'] }}
-            {% endfor %}
             <p><b>Fonction actuelle :</b> {{ formateurs.fonctionActuelle }}</p>
             <hr>
             <h2><b>Planning du formateur</b></h2>
@@ -135,7 +150,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYDcMOzzAU969z2ic1siiuODCpq92guw&callback=myMap"></script>
     {% if formateurs is not iterable %}
         <script src="https://fullcalendar.io/releases/core/4.0.1/main.min.js"></script>
         <script src="https://fullcalendar.io/releases/interaction/4.0.1/main.min.js"></script>
@@ -153,7 +167,9 @@
                         {
                             url: "{{ path('fc_load_events') }}",
                             type: "POST",
-                            data: {},
+                            data: {
+                                filters: {},
+                            },
                             error: () => {
                                 // alert("There was an error while fetching FullCalendar!");
                             },
@@ -165,8 +181,7 @@
                         right: 'timeGridWeek,timeGridDay,dayGridMonth',
                     },
                     plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
-                    timeZone: "UTC",
-                    filters: 'test'
+                    timeZone: "UTC"
                 });
                 calendar.render();
 

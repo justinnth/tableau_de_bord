@@ -185,6 +185,25 @@ b{
 
 #mapid { height: 350px; }
 
+
+.valide{
+    background-color: #b9d664;
+}
+
+.Pvalide{
+    background-color: #f7bf5b;
+}
+
+.Nvalide{
+    background-color: #e8816f;
+}
+
+.warning{
+    background-color: #e00611;
+}
+
+
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
