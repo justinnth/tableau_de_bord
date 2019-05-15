@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Table des formateurs {% endblock %}
+{% block title %}
+    {% if formateurs is iterable %}
+        Table des formateurs
+    {% else %}
+        {{ formateurs.prenom }} {{ formateurs.nom }}
+    {% endif %}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -83,7 +89,6 @@
             {% endfor %}
         </div>
     {% else %}
-        <hr>
         {% for typeFormation in formateurs.typeFormations %}
             {% if typeFormation['date'] <= date('-3years') %}
                 <li class="list-group-item warning" style="margin-bottom: 10px">
@@ -160,18 +165,19 @@
                 var calendarEl = document.getElementById('calendar-holder');
 
                 var calendar = new FullCalendar.Calendar(calendarEl, {
+                    locale: 'fr',
                     defaultView: 'dayGridWeek',
                     editable: true,
                     eventSources: [
                         {
                             url: "/fc-load-events",
-                            type: "POST",
-                            data: function () {
-                                return {
-                                    formateur: 'test'
-                                }
+                            method: "POST",
+                            extraParams: {
+                                filters: JSON.stringify({
+                                    formateur: {{ formateurs.id }}
+                                })
                             },
-                            error: () => {
+                            failure: () => {
                                 // alert("There was an error while fetching FullCalendar!");
                             },
                         },
@@ -185,8 +191,6 @@
                     timeZone: "UTC"
                 });
                 calendar.render();
-
-                calendar.setOption('locale', 'fr');
             });
         </script>
     {% endif %}
