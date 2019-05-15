@@ -29,4 +29,4 @@ services:
 
     App\EventListener\CalendarListener:
         tags:
-            - { name: 'kernel.event_listener', event: 'calendar.set_data', method: loadAction }
+            - { name: 'kernel.event_listener', event: 'calendar.set_data', method: load }

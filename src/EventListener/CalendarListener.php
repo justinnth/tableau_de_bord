@@ -26,7 +26,7 @@ class CalendarListener
         $this->router = $router;
     }
 
-    public function loadAction(CalendarEvent $calendar)
+    public function load(CalendarEvent $calendar)
     {
         $start = $calendar->getStart();
         $end = $calendar->getEnd();

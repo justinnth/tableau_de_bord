@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formation{% endblock %}
+
+{% block body %}
+    <h1>Formation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ formation.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ formation.titre }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ formation.duree }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ formation.reference }}</td>
+            </tr>
+            <tr>
+                <th>Pedagogie</th>
+                <td>{{ formation.pedagogie }}</td>
+            </tr>
+            <tr>
+                <th>PublicVise</th>
+                <td>{{ formation.publicVise }}</td>
+            </tr>
+            <tr>
+                <th>Prerequis</th>
+                <td>{{ formation.prerequis }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ formation.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Cpf</th>
+                <td>{{ formation.cpf ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ formation.photo }}</td>
+            </tr>
+            <tr>
+                <th>Lien</th>
+                <td>{{ formation.lien }}</td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td>{{ formation.facebook }}</td>
+            </tr>
+            <tr>
+                <th>TrameARealiser</th>
+                <td>{{ formation.trameARealiser ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TrameValiderIperia</th>
+                <td>{{ formation.trameValiderIperia ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Numero_cpf</th>
+                <td>{{ formation.numeroCpf }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ formation.createdAt ? formation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ formation.updatedAt ? formation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('formation_index') }}">back to list</a>
+
+    <a href="{{ path('formation_edit', {'id': formation.id}) }}">edit</a>
+
+    {{ include('formation/_delete_form.html.twig') }}
+{% endblock %}

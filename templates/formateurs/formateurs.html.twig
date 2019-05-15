@@ -11,9 +11,6 @@
 
 {% block body %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a class="navbar-brand" href="{{ path('app_homepage') }}">
                 <img src="{{ asset('img/logo-header-petit.png') }}" width="auto" height="30" alt="logo">
@@ -48,8 +45,10 @@
             </div>
         </div>
     </nav>
+
+    <hr>
+
     {% if formateurs is iterable %}
-        <hr>
         <div class="container-fluid">
             <ul class="list-group list-group-flush">
                 {% for formateur in formateurs %}
@@ -69,7 +68,7 @@
             {% for row in formateurs|batch(4) %}
                 <div class="card-deck">
                     {% for column in row %}
-                        <div class="card hover">
+                        <div class="card hover formateurClick">
                             <div class="card-body">
                                 <a href="{{ path('app_formateurs', {'id': column.id}) }}" class="stretched-link"></a>
                                 <i class="far fa-id-card fa-3x"></i>
@@ -165,10 +164,12 @@
                     editable: true,
                     eventSources: [
                         {
-                            url: "{{ path('fc_load_events') }}",
+                            url: "/fc-load-events",
                             type: "POST",
-                            data: {
-                                filters: {},
+                            data: function () {
+                                return {
+                                    formateur: 'test'
+                                }
                             },
                             error: () => {
                                 // alert("There was an error while fetching FullCalendar!");

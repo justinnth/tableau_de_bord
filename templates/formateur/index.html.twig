@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formateur index{% endblock %}
+
+{% block body %}
+    <h1>Formateur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Date_de_naissance</th>
+                <th>Mail</th>
+                <th>Telephone</th>
+                <th>Meilleur_diplome</th>
+                <th>Salarie</th>
+                <th>Fonction_actuelle</th>
+                <th>Domaine_expertise</th>
+                <th>Mode_acquisition</th>
+                <th>Type_formations</th>
+                <th>Zone_execution</th>
+                <th>Formation_iperia</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formateur in formateurs %}
+            <tr>
+                <td>{{ formateur.id }}</td>
+                <td>{{ formateur.nom }}</td>
+                <td>{{ formateur.prenom }}</td>
+                <td>{{ formateur.dateDeNaissance ? formateur.dateDeNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ formateur.mail }}</td>
+                <td>{{ formateur.telephone }}</td>
+                <td>{{ formateur.meilleurDiplome }}</td>
+                <td>{{ formateur.salarie ? 'Yes' : 'No' }}</td>
+                <td>{{ formateur.fonctionActuelle }}</td>
+                <td>{{ formateur.domaineExpertise }}</td>
+                <td>{{ formateur.modeAcquisition }}</td>
+                <td>{{ formateur.typeFormations ? formateur.typeFormations|join(', ') : '' }}</td>
+                <td>{{ formateur.zoneExecution ? formateur.zoneExecution|join(', ') : '' }}</td>
+                <td>{{ formateur.formationIperia ? formateur.formationIperia|join(', ') : '' }}</td>
+                <td>{{ formateur.createdAt ? formateur.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ formateur.updatedAt ? formateur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('formateur_show', {'id': formateur.id}) }}">show</a>
+                    <a href="{{ path('formateur_edit', {'id': formateur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('formateur_new') }}">Create new</a>
+{% endblock %}
