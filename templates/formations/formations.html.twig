@@ -98,7 +98,7 @@
                 </li>
                 <li class="list-group-item"><b>Prérequis :</b> {{ formations.prerequis }}</li>
                 <li class="list-group-item"><b>Lieu :</b> {{ formations.lieu }}</li>
-                <li class="list-group-item"><b>CPF :</b> {% if not formations.cpf %} Non {% else  %} Oui : {{ formations.numerocpf }} {% endif %}</li>
+                {% if formations.cpf %}<li class="list-group-item"><b>CPF :</b>Oui : {{ formations.numerocpf }}</li>{% endif %}
             </ul>
 
             <hr>
