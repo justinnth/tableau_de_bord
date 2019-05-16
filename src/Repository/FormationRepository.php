@@ -2,8 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\ChercherFormation;
 use App\Entity\Formation;
+use App\Form\ChercherFormationType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**

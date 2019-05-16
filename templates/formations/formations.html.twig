@@ -41,7 +41,19 @@
             </div>
         </div>
     </nav>
+
     {% if formations is iterable %}
+
+        <div class="links">
+            <h3>Filtrer selon une catégorie :</h3>
+            <a href="{{ path('app_formations', {'id': 'ThemeA'}) }}" class="btn effect btn1">ThemeA</a>
+            <a href="{{ path('app_formations', {'id': 'ThemeB'}) }}" class="btn effect btn1">ThemeB</a>
+            <a href="{{ path('app_formations', {'id': 'ThemeC'}) }}" class="btn effect btn1">ThemeC</a>
+            <a href="{{ path('app_formations', {'id': 'ThemeD'}) }}" class="btn effect btn1">ThemeD</a>
+            <a href="{{ path('app_formations', {'id': 'ThemeE'}) }}" class="btn effect btn1">ThemeE</a>
+            <a href="{{ path('app_formations', {'id': 'ThemeF'}) }}" class="btn effect btn1">ThemeF</a>
+        </div>
+
         <hr>
         <div class="container-fluid">
             <div class="text-center">
@@ -71,7 +83,7 @@
     {% else %}
         <hr>
         <div class="container formations">
-            <h1>Information sur la formation : <b>Ab recusandae libero quasi voluptatem eos qui. Molestias providen</b></h1> {# Titre formation en dur pcq le type titre dans les fixtures voila quoi #}
+            <h1>Information sur la formation : <b>{{ formations.titre }}</b></h1>
             <p>Référence : {{ formations.reference }}</p>
             <hr>
             <ul class="list-group list-group-flush">
@@ -86,6 +98,7 @@
                 </li>
                 <li class="list-group-item"><b>Prérequis :</b> {{ formations.prerequis }}</li>
                 <li class="list-group-item"><b>Lieu :</b> {{ formations.lieu }}</li>
+                <li class="list-group-item"><b>CPF :</b> {% if not formations.cpf %} Non {% else  %} Oui : {{ formations.numerocpf }} {% endif %}</li>
             </ul>
 
             <hr>

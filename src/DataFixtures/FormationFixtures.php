@@ -23,7 +23,9 @@ class FormationFixtures extends BaseFixture
                 ->setLien("leLien")
                 ->setFacebook("leFacebook")
                 ->setTrameARealiser($this->faker->boolean(70))
-                ->setTrameValiderIperia($this->faker->boolean(70));
+                ->setTrameValiderIperia($this->faker->boolean(70))
+                ->setNumeroCpf($this->faker->numerify('######'))
+                ->setTheme($this->faker->randomElement($array = array ('a','b','c','d','e','f')));
         });
         $manager->flush();
     }

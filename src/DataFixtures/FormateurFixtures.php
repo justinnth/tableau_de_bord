@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class FormateurFixtures extends BaseFixture
 {
+
     protected function loadData(ObjectManager $manager)
     {
         $this->createMany(Formateur::class, 50, function (Formateur $formateur, $count){
