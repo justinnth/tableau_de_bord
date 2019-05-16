@@ -202,6 +202,55 @@ b{
     background-color: #e00611;
 }
 
+.bouton{
+    border-color:#97BF22;
+    background-color: #F5A619;
+}
+
+.bouton:hover{
+    background-color: #97BF22;
+    border-color:#F5A619;
+
+}
+
+.links{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.effect{
+    position: relative;
+    display: inline-block;
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+    border: 2px solid #97BF22;
+    padding: 14px 60px;
+    overflow: hidden;
+    transition: 1s all ease;
+    font-weight: bold;
+}
+.effect::before{
+    background: #97BF22;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: -1;
+    transition: all 0.6s ease;
+}
+
+.btn1::before{
+    width: 0%;
+    height: 100%;
+}
+
+.btn1:hover::before{
+    width: 100%;
+}
+
+
 
 
 /* Sticky footer styles

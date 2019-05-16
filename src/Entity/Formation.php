@@ -101,6 +101,11 @@ class Formation
      */
     private $numero_cpf;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $theme;
+
     public function __construct()
     {
         $this->formateurs = new ArrayCollection();
@@ -247,6 +252,18 @@ class Formation
     public function setFacebook(?string $facebook): self
     {
         $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getTheme(): ?string
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?string $theme): self
+    {
+        $this->theme = $theme;
 
         return $this;
     }
