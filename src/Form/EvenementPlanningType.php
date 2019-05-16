@@ -16,6 +16,7 @@ class EvenementPlanningType extends AbstractType
             ->add('endAt')
             ->add('title', null, ['help' => 'Correspond au nom de l\'évènement qui apparaît dans le planning'])
             ->add('formateur')
+            ->add('formation')
         ;
     }
 

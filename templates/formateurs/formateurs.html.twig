@@ -145,7 +145,6 @@
             <p><b>Fonction actuelle :</b> {{ formateurs.fonctionActuelle }}</p>
             <hr>
             <h2><b>Planning du formateur</b></h2>
-            <a class="btn btn-success" href="{{ path('evenement_planning_new') }}">Créer un nouvel évènement</a>
             {% include '@Calendar/calendar.html' %}
         </div>
     {% endif %}

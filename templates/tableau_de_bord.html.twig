@@ -74,6 +74,19 @@
                     <p>TODO</p>
                 </div>
             </div>
+            {% if is_granted('ROLE_ADMIN_PLANNING') %}
+            <div class="box">
+                <a href="{{ path('evenement_planning_index') }}" class="stretched-link"></a>
+                <div class="icon">
+                    <i class="fas fa-edit"></i>
+                    <h1>Plannings</h1>
+                </div>
+                <div class="content">
+                    <h3>Gérer les évènement/plannings</h3>
+                    <p>Cliquez pour accéder à la gestion des plannings des formateurs, ajoutez, modifiez, supprimez des évènements</p>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
     <hr>
