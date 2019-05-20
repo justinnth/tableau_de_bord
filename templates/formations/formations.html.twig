@@ -53,6 +53,11 @@
             <a href="{{ path('app_formations', {'id': 'ThemeE'}) }}" class="btn effect btn1">ThemeE</a>
             <a href="{{ path('app_formations', {'id': 'ThemeF'}) }}" class="btn effect btn1">ThemeF</a>
         </div>
+        <div class="links">
+            <a href="{{ path('app_formations', {'id': 'trame'}) }}" class="btn effect1 btn1">Trame non réalisée</a>
+            <a href="{{ path('app_formations', {'id': 'iperia'}) }}" class="btn effect1 btn1">Trame non validée</a>
+            <a href="{{ path('app_formations', {'id': 'rouge'}) }}" class="btn effect2 btn1"><i class="fas fa-exclamation-triangle"></i> Trame + Iperia</a>
+        </div>
 
         <hr>
         <div class="container-fluid">
@@ -64,11 +69,11 @@
                 <div class="card-deck">
                     {% for column in row %}
                         <div class="card hover">
-                            <div class="card-body">
+                            <div class="card-body {% if column.trameARealiser and column.trameValiderIperia %} valide  {% elseif not column.trameARealiser and not column.trameValiderIperia%} Nvalide  {% else  %} Pvalide {% endif %}">
                                 <div class="media">
                                     <div class="media-body">
                                         <a href="{{ path('app_formations', {'id': column.id}) }}" class="stretched-link"></a>
-                                        <h5 class="mt-0 mb-1">{{ column.titre }}</h5>{# Titre formation en dur pcq le type titre dans les fixtures voila quoi #}
+                                        <h5 class="mt-0 mb-1">{{ column.titre }}</h5>
                                         <h6 style="margin-top: 10px" class="card-subtitle mb-2 text-muted">Référence : {{ column.reference }}</h6>
                                     </div>
                                     <i class="fas fa-file fa-3x"></i></h6>
@@ -95,6 +100,7 @@
                     {% for formateur in formations.formateurs %}
                         {{ formateur.nom }} {{ formateur.prenom }}
                     {% endfor %}
+                    Hawk Stewart / Michel Bouk
                 </li>
                 <li class="list-group-item"><b>Prérequis :</b> {{ formations.prerequis }}</li>
                 <li class="list-group-item"><b>Lieu :</b> {{ formations.lieu }}</li>
@@ -127,6 +133,7 @@
                     </div>
                 </li>
             </ul>
+            {{ formations.descriptif }}
         </div>
     {% endif %}
     <hr>

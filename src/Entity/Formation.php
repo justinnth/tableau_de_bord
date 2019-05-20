@@ -106,6 +106,11 @@ class Formation
      */
     private $theme;
 
+    /**
+     * @ORM\Column(type="text", length=65535, nullable=true)
+     */
+    private $descriptif;
+
     public function __construct()
     {
         $this->formateurs = new ArrayCollection();
@@ -364,6 +369,18 @@ class Formation
     public function __toString()
     {
         return $this->getTitre();
+    }
+
+    public function getDescriptif(): ?string
+    {
+        return $this->descriptif;
+    }
+
+    public function setDescriptif(?string $descriptif): self
+    {
+        $this->descriptif = $descriptif;
+
+        return $this;
     }
 
 }

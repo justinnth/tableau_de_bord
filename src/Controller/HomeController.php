@@ -102,7 +102,14 @@ class HomeController extends BaseController
             $formation = $repository->findBy(
                 ['theme' => 'f']
             );
+        }elseif ($id == 'rouge'){
+            $formation = $repository->findBy(array('trameARealiser' => false, 'trameValiderIperia' => false));
+        }elseif ($id == 'iperia'){
+            $formation = $repository->findBy(array('trameARealiser' => true, 'trameValiderIperia' => false));
+        }elseif ($id == 'trame'){
+            $formation = $repository->findBy(array('trameARealiser' => false, 'trameValiderIperia' => true));
         }
+
 
         if($request->isMethod('POST')){
             $nom=$request->get('formation');

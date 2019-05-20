@@ -249,13 +249,60 @@ b{
     transition: all 0.6s ease;
 }
 
+.effect1{
+    position: relative;
+    display: inline-block;
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+    border: 2px solid #f7bf5b;
+    padding: 14px 60px;
+    overflow: hidden;
+    transition: 1s all ease;
+    font-weight: bold;
+}
+.effect1::before{
+    background: #f7bf5b;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: -1;
+    transition: all 0.6s ease;
+}
+
+.effect2{
+    position: relative;
+    display: inline-block;
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+    border: 2px solid #e8816f;
+    padding: 14px 60px;
+    overflow: hidden;
+    transition: 1s all ease;
+    font-weight: bold;
+}
+.effect2::before{
+    background: #e8816f;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: -1;
+    transition: all 0.6s ease;
+}
+
 .btn1::before{
-    width: 0%;
-    height: 100%;
+    width: 100%;
+    height: 0%;
+    transform: translate(-50%,-50%) rotate(45deg);
 }
 
 .btn1:hover::before{
-    width: 100%;
+    height: 380%;
 }
 
 
