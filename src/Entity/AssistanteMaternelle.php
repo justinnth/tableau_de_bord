@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AssistanteMaternelleRepository")
  */
 class AssistanteMaternelle
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -55,6 +60,22 @@ class AssistanteMaternelle
      * @ORM\Column(type="string", length=255)
      */
     private $nomJeuneFille;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ParentFacilitateur", mappedBy="assistanteMaternelle")
+     */
+    private $parentFacilitateurs;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\SessionFormation", mappedBy="participants")
+     */
+    private $sessionFormations;
+
+    public function __construct()
+    {
+        $this->parentFacilitateurs = new ArrayCollection();
+        $this->sessionFormations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,5 +176,69 @@ class AssistanteMaternelle
         $this->nomJeuneFille = $nomJeuneFille;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|ParentFacilitateur[]
+     */
+    public function getParentFacilitateurs(): Collection
+    {
+        return $this->parentFacilitateurs;
+    }
+
+    public function addParentFacilitateur(ParentFacilitateur $parentFacilitateur): self
+    {
+        if (!$this->parentFacilitateurs->contains($parentFacilitateur)) {
+            $this->parentFacilitateurs[] = $parentFacilitateur;
+            $parentFacilitateur->setAssistanteMaternelle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParentFacilitateur(ParentFacilitateur $parentFacilitateur): self
+    {
+        if ($this->parentFacilitateurs->contains($parentFacilitateur)) {
+            $this->parentFacilitateurs->removeElement($parentFacilitateur);
+            // set the owning side to null (unless already changed)
+            if ($parentFacilitateur->getAssistanteMaternelle() === $this) {
+                $parentFacilitateur->setAssistanteMaternelle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SessionFormation[]
+     */
+    public function getSessionFormations(): Collection
+    {
+        return $this->sessionFormations;
+    }
+
+    public function addSessionFormation(SessionFormation $sessionFormation): self
+    {
+        if (!$this->sessionFormations->contains($sessionFormation)) {
+            $this->sessionFormations[] = $sessionFormation;
+            $sessionFormation->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSessionFormation(SessionFormation $sessionFormation): self
+    {
+        if ($this->sessionFormations->contains($sessionFormation)) {
+            $this->sessionFormations->removeElement($sessionFormation);
+            $sessionFormation->removeParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getPrenom()." ".$this->getNom();
     }
 }

@@ -111,10 +111,16 @@ class Formation
      */
     private $descriptif;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SessionFormation", mappedBy="formation")
+     */
+    private $sessionFormations;
+
     public function __construct()
     {
         $this->formateurs = new ArrayCollection();
         $this->evenementPlannings = new ArrayCollection();
+        $this->sessionFormations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -379,6 +385,37 @@ class Formation
     public function setDescriptif(?string $descriptif): self
     {
         $this->descriptif = $descriptif;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SessionFormation[]
+     */
+    public function getSessionFormations(): Collection
+    {
+        return $this->sessionFormations;
+    }
+
+    public function addSessionFormation(SessionFormation $sessionFormation): self
+    {
+        if (!$this->sessionFormations->contains($sessionFormation)) {
+            $this->sessionFormations[] = $sessionFormation;
+            $sessionFormation->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSessionFormation(SessionFormation $sessionFormation): self
+    {
+        if ($this->sessionFormations->contains($sessionFormation)) {
+            $this->sessionFormations->removeElement($sessionFormation);
+            // set the owning side to null (unless already changed)
+            if ($sessionFormation->getFormation() === $this) {
+                $sessionFormation->setFormation(null);
+            }
+        }
 
         return $this;
     }

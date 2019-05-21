@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SessionFormation index{% endblock %}
+
+{% block body %}
+    <h1>SessionFormation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>BeginAt</th>
+                <th>EndAt</th>
+                <th>Title</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for session_formation in session_formations %}
+            <tr>
+                <td>{{ session_formation.id }}</td>
+                <td>{{ session_formation.beginAt ? session_formation.beginAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ session_formation.endAt ? session_formation.endAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ session_formation.title }}</td>
+                <td>{{ session_formation.createdAt ? session_formation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ session_formation.updatedAt ? session_formation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('session_formation_show', {'id': session_formation.id}) }}">show</a>
+                    <a href="{{ path('session_formation_edit', {'id': session_formation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('session_formation_new') }}">Create new</a>
+{% endblock %}

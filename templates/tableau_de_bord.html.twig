@@ -60,7 +60,7 @@
                 <a href="{{ path('app_assmat', {'id': 'all'}) }}">
                 <div class="icon">
                     <i class="fas fa-users"></i>
-                    <h1>Assistantes maternelles</h1>
+                    <h1 class="text-center">Assistantes maternelles</h1>
                 </div>
                 <div class="content">
                     <h3>Accéder aux assistantes maternelles</h3>
@@ -78,14 +78,14 @@
             </div>
             {% if is_granted('ROLE_ADMIN_PLANNING') %}
             <div class="box">
-                <a href="{{ path('evenement_planning_index') }}" class="stretched-link"></a>
+                <a href="{{ path('session_formation_new') }}" class="stretched-link"></a>
                 <div class="icon">
                     <i class="fas fa-edit"></i>
-                    <h1>Plannings</h1>
+                    <h1 class="text-center">Sessions de formation</h1>
                 </div>
                 <div class="content">
-                    <h3>Gérer les évènement/plannings</h3>
-                    <p>Cliquez pour accéder à la gestion des plannings des formateurs, ajoutez, modifiez, supprimez des évènements</p>
+                    <h3>Gérer les sessions de formation</h3>
+                    <p>Cliquez pour accéder à la gestion des sessions de formation, des plannings, des participants, etc.</p>
                 </div>
             </div>
             {% endif %}
