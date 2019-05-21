@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 
+use App\Entity\AssistanteMaternelle;
 use App\Entity\ChercherFormation;
 use App\Entity\Formateur;
 use App\Entity\Formation;
@@ -56,6 +57,37 @@ class HomeController extends BaseController
 
         return $this->render('formateurs/formateurs.html.twig', [
             'formateurs' => $formateur
+        ]);
+    }
+
+    /**
+     * @Route("/assistantes_maternelles/{id}", name="app_assmat")
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
+     */
+    public function assistanteMaternelle($id, EntityManagerInterface $em, Request $request)
+    {
+        $repository = $em->getRepository(AssistanteMaternelle::class);
+
+        if ($id == 'all'){
+            $assmat = $repository->findAll();
+            if($request->isMethod('POST')){
+                $nom=$request->get('nom');
+                $assmat=$repository->findBy(array("nom"=>$nom));
+            }
+        }
+        else{
+            /** @var Formateur $formateur */
+            $assmat = $repository->findOneBy(['id' => $id]);
+        }
+
+        if (!$assmat)
+            throw $this->createNotFoundException(sprintf("Aucune assistante maternelle pour l'id : %s", $id));
+
+        return $this->render('assistantes_maternelles/assistantes_maternelles.html.twig', [
+            'assistante_maternelle' => $assmat
         ]);
     }
 

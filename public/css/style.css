@@ -305,6 +305,11 @@ b{
     height: 420%;
 }
 
+.alert-danger{
+    width:95%;
+    margin: 0 auto;
+    margin-bottom: 1em;
+}
 
 
 

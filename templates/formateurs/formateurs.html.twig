@@ -56,17 +56,15 @@
 
     {% if formateurs is iterable %}
         <div class="container-fluid">
-            <ul class="list-group list-group-flush">
                 {% for formateur in formateurs %}
                     {% for typeFormation in formateur.typeFormations %}
                         {% if typeFormation['date'] <= date('-3years') %}
-                            <li class="list-group-item warning">
-                                <p><i class="fas fa-exclamation-triangle"></i> le formateur {{ formateur.prenom }} {{ formateur.nom }} n'est pas formé sur les 3 dernières années pour la formation {{ typeFormation['formation'] }}</p>
-                            </li>
+                                <div class="alert alert-danger" role="alert">
+                                    <i class="fas fa-exclamation-triangle"></i> le formateur {{ formateur.prenom }} {{ formateur.nom }} n'est pas formé sur les 3 dernières années pour la formation {{ typeFormation['formation'] }}
+                                </div>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-            </ul>
             <div class="text-center">
                 <p class="text-uppercase badge badge-secondary">Sélectionnez un formateur</p>
             </div>
@@ -91,9 +89,9 @@
     {% else %}
         {% for typeFormation in formateurs.typeFormations %}
             {% if typeFormation['date'] <= date('-3years') %}
-                <li class="list-group-item warning" style="margin-bottom: 10px">
-                    <p><i class="fas fa-exclamation-triangle"></i> le formateur {{ formateurs.nom }} {{ formateurs.prenom }} n'est pas formé sur les 3 dernières années pour la formation {{ typeFormation['formation'] }}</p>
-                </li>
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i> le formateur {{ formateurs.prenom }} {{ formateurs.nom }} n'est pas formé sur les 3 dernières années pour la formation {{ typeFormation['formation'] }}
+                </div>
             {% endif %}
         {% endfor %}
         <div class="container">
