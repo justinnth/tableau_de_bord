@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ParentFacilitateur index{% endblock %}
+
+{% block body %}
+    <h1>ParentFacilitateur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for parent_facilitateur in parent_facilitateurs %}
+            <tr>
+                <td>{{ parent_facilitateur.id }}</td>
+                <td>{{ parent_facilitateur.nom }}</td>
+                <td>{{ parent_facilitateur.prenom }}</td>
+                <td>{{ parent_facilitateur.createdAt ? parent_facilitateur.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ parent_facilitateur.updatedAt ? parent_facilitateur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('parent_facilitateur_show', {'id': parent_facilitateur.id}) }}">show</a>
+                    <a href="{{ path('parent_facilitateur_edit', {'id': parent_facilitateur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('parent_facilitateur_new') }}">Create new</a>
+{% endblock %}

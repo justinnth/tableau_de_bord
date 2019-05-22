@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Formation;
 use App\Entity\SessionFormation;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class SessionFormationFixtures extends BaseFixture

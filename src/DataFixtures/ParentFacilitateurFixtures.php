@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\AssistanteMaternelle;
 use App\Entity\ParentFacilitateur;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class ParentFacilitateurFixtures extends BaseFixture

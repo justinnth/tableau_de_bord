@@ -17,6 +17,8 @@ class SessionFormationController extends AbstractController
 {
     /**
      * @Route("/", name="session_formation_index", methods={"GET"})
+     * @param SessionFormationRepository $sessionFormationRepository
+     * @return Response
      */
     public function index(SessionFormationRepository $sessionFormationRepository): Response
     {
@@ -27,6 +29,8 @@ class SessionFormationController extends AbstractController
 
     /**
      * @Route("/new", name="session_formation_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class SessionFormationController extends AbstractController
 
     /**
      * @Route("/{id}", name="session_formation_show", methods={"GET"})
+     * @param SessionFormation $sessionFormation
+     * @return Response
      */
     public function show(SessionFormation $sessionFormation): Response
     {
@@ -60,6 +66,9 @@ class SessionFormationController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="session_formation_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param SessionFormation $sessionFormation
+     * @return Response
      */
     public function edit(Request $request, SessionFormation $sessionFormation): Response
     {
@@ -82,6 +91,9 @@ class SessionFormationController extends AbstractController
 
     /**
      * @Route("/{id}", name="session_formation_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param SessionFormation $sessionFormation
+     * @return Response
      */
     public function delete(Request $request, SessionFormation $sessionFormation): Response
     {

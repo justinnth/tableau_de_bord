@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ParentFacilitateur{% endblock %}
+
+{% block body %}
+    <h1>ParentFacilitateur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ parent_facilitateur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ parent_facilitateur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ parent_facilitateur.prenom }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ parent_facilitateur.createdAt ? parent_facilitateur.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ parent_facilitateur.updatedAt ? parent_facilitateur.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('parent_facilitateur_index') }}">back to list</a>
+
+    <a href="{{ path('parent_facilitateur_edit', {'id': parent_facilitateur.id}) }}">edit</a>
+
+    {{ include('parent_facilitateur/_delete_form.html.twig') }}
+{% endblock %}

@@ -33,31 +33,29 @@
         <hr class="my-4">
         <div class="container" style="display:table">
             <div class="box">
-                <a href="{{ path('app_formateurs', {'id': 'all'}) }}">
-                    <div class="icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <h1>Formateurs</h1>
-                    </div>
-                    <div class="content">
-                        <h3>Accéder aux formateurs</h3>
-                        <p>Cliquez pour accéder à la liste de tous les formateurs, leur planning, leurs formations et d'autres informations les concernant.</p>
-                    </div>
-                </a>
+                <a class="stretched-link" href="{{ path('app_formateurs', {'id': 'all'}) }}"></a>
+                <div class="icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h1>Formateurs</h1>
+                </div>
+                <div class="content">
+                    <h3>Accéder aux formateurs</h3>
+                    <p>Cliquez pour accéder à la liste de tous les formateurs, leur planning, leurs formations et d'autres informations les concernant.</p>
+                </div>
             </div>
             <div class="box">
-                <a href="{{ path('app_formations', {'id': 'all'}) }}">
-                    <div class="icon">
-                        <i class="fas fa-book-open"></i>
-                        <h1>Formations</h1>
-                    </div>
-                    <div class="content">
-                        <h3>Accéder aux formations</h3>
-                        <p>Cliquez pour accéder à la liste de toutes les formations disponibles.</p>
-                    </div>
-                </a>
+                <a class="stretched-link" href="{{ path('app_formations', {'id': 'all'}) }}"></a>
+                <div class="icon">
+                    <i class="fas fa-book-open"></i>
+                    <h1>Formations</h1>
+                </div>
+                <div class="content">
+                    <h3>Accéder aux formations</h3>
+                    <p>Cliquez pour accéder à la liste de toutes les formations disponibles.</p>
+                </div>
             </div>
             <div class="box">
-                <a href="{{ path('app_assmat', {'id': 'all'}) }}">
+                <a class="stretched-link" href="{{ path('app_assmat', {'id': 'all'}) }}"></a>
                 <div class="icon">
                     <i class="fas fa-users"></i>
                     <h1 class="text-center">Assistantes maternelles</h1>
@@ -67,18 +65,9 @@
                     <p>Cliquez pour accéder à la liste des assistantes maternelles et trouver toutes les informations les concernants</p>
                 </div>
             </div>
-            <div class="box">
-                <div class="icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <div class="content">
-                    <h3>Todo</h3>
-                    <p>TODO</p>
-                </div>
-            </div>
             {% if is_granted('ROLE_ADMIN_PLANNING') %}
             <div class="box">
-                <a href="{{ path('session_formation_new') }}" class="stretched-link"></a>
+                <a class="stretched-link" href="{{ path('session_formation_index') }}"></a>
                 <div class="icon">
                     <i class="fas fa-edit"></i>
                     <h1 class="text-center">Sessions de formation</h1>
