@@ -3,7 +3,6 @@
 
 namespace App\EventListener;
 
-use App\Repository\EvenementPlanningRepository;
 use App\Repository\SessionFormationRepository;
 use CalendarBundle\Entity\Event;
 use CalendarBundle\Event\CalendarEvent;
