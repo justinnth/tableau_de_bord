@@ -15,8 +15,6 @@ class SessionFormationType extends AbstractType
             ->add('beginAt')
             ->add('endAt')
             ->add('title')
-            ->add('createdAt')
-            ->add('updatedAt')
             ->add('formation')
             ->add('formateurs')
             ->add('participants')

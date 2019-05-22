@@ -1,4 +1,49 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form_label(form.beginAt, 'Début') }}</label>
+        <div class="col-sm-10">
+            {{ form_widget(form.beginAt) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form_label(form.endAt, 'Fin') }}</label>
+        <div class="col-sm-10">
+            {{ form_widget(form.endAt) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form_label(form.title, 'Intitulé de la session') }}</label>
+        <div class="col-sm-10">
+            {{ form_widget(form.title) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form_label(form.formation, 'Formation') }}</label>
+        <div class="col-sm-10">
+            {{ form_widget(form.formation) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form_label(form.formateurs, 'Formateurs sur la session') }}</label>
+        <div class="col-sm-10">
+            {{ form_widget(form.formateurs) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form_label(form.participants, 'Assistantes maternelles') }}</label>
+        <div class="col-sm-10">
+            {{ form_widget(form.participants) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{ form_label(form.parentsFacilitateurs, 'Parents faciliateurs des assistantes maternelles') }}</label>
+        <div class="col-sm-10">
+            {{ form_widget(form.parentsFacilitateurs) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+    </div>
 {{ form_end(form) }}
