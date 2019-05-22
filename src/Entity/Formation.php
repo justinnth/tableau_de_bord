@@ -92,11 +92,6 @@ class Formation
     private $formateurs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EvenementPlanning", mappedBy="formation")
-     */
-    private $evenementPlannings;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $numero_cpf;

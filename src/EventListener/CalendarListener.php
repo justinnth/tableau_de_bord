@@ -45,25 +45,25 @@ class CalendarListener
 
         foreach ($evenements as $evenement){
 
-            $evenementPlanning = new Event(
+            $sessionFormation = new Event(
                 $evenement->getTitle(),
                 $evenement->getBeginAt(),
                 $evenement->getEndAt()
             );
 
-            $evenementPlanning->setOptions([
+            $sessionFormation->setOptions([
                 'backgroundColor' => 'red',
                 'borderColor' => 'red',
             ]);
 
-            $evenementPlanning->addOption(
+            $sessionFormation->addOption(
                 'url',
                 $this->router->generate('evenement_planning_show', [
                     'id' => $evenement->getId(),
                 ])
             );
 
-            $calendar->addEvent($evenementPlanning);
+            $calendar->addEvent($sessionFormation);
         }
     }
 

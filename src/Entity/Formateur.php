@@ -87,11 +87,6 @@ class Formateur
     private $formation_iperia = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EvenementPlanning", mappedBy="formateur")
-     */
-    private $evenementPlannings;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="formateurs")
      */
     private $formations;
