@@ -73,6 +73,22 @@
         <hr>
         <div class="container">
             <h1>Information sur l'assistante maternelle : <b>{{ assistante_maternelle.nom }} {{ assistante_maternelle.prenom }}</b></h1>
+            <hr>
+                <div class="row">
+                    <div class="col-sm" style="text-align: center">
+                        <i class="fas fa-user-circle fa-9x"></i>
+                    </div>
+                    <div class="col-sm">
+                        <b>Nom :</b> {{ assistante_maternelle.nom }}<br />
+                        <b>Prénom :</b> {{ assistante_maternelle.prenom }}<br />
+                        <b>Nom de jeune fille :</b> {{ assistante_maternelle.nomJeuneFille }}<br />
+                        <b>Adresse e-mail :</b> {{ assistante_maternelle.mail }}<br />
+                        <b>Née le :</b> {{ assistante_maternelle.dateNaissance|date('d F Y') }}<br />
+                        <b>téléphone 1 :</b> {{ assistante_maternelle.telephone1 }}<br />
+                        <b>téléphone 2 :</b> {{ assistante_maternelle.telephone2 }}<br />
+                        <b>Adresse postale :</b> {{ assistante_maternelle.adressePostale }}<br />
+                    </div>
+                </div>
         </div>
     {% endif %}
     <hr>
