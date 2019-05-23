@@ -15,10 +15,13 @@ class SessionFormationType extends AbstractType
             ->add('beginAt')
             ->add('endAt')
             ->add('title')
-            ->add('formation')
-            ->add('formateurs')
+            ->add('formation');
+
+        $builder->addEventListener(Fo)
+
+           /* ->add('formateurs')
             ->add('participants')
-            ->add('parentsFacilitateurs')
+            ->add('parentsFacilitateurs')*/
         ;
     }
 

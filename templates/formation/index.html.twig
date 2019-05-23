@@ -23,6 +23,8 @@
                 <th>TrameARealiser</th>
                 <th>TrameValiderIperia</th>
                 <th>Numero_cpf</th>
+                <th>Theme</th>
+                <th>Descriptif</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>actions</th>
@@ -46,6 +48,8 @@
                 <td>{{ formation.trameARealiser ? 'Yes' : 'No' }}</td>
                 <td>{{ formation.trameValiderIperia ? 'Yes' : 'No' }}</td>
                 <td>{{ formation.numeroCpf }}</td>
+                <td>{{ formation.theme }}</td>
+                <td>{{ formation.descriptif }}</td>
                 <td>{{ formation.createdAt ? formation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ formation.updatedAt ? formation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
@@ -55,7 +59,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="18">no records found</td>
+                <td colspan="20">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

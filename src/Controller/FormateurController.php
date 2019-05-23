@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Formateur;
-use App\Form\FormateurType;
+use App\Form\Formateur1Type;
 use App\Repository\FormateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class FormateurController extends AbstractController
     public function new(Request $request): Response
     {
         $formateur = new Formateur();
-        $form = $this->createForm(FormateurType::class, $formateur);
+        $form = $this->createForm(Formateur1Type::class, $formateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class FormateurController extends AbstractController
      */
     public function edit(Request $request, Formateur $formateur): Response
     {
-        $form = $this->createForm(FormateurType::class, $formateur);
+        $form = $this->createForm(Formateur1Type::class, $formateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
