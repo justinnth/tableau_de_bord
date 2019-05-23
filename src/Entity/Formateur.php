@@ -74,7 +74,7 @@ class Formateur
     /**
      * @ORM\Column(type="array")
      */
-    private $type_formations;
+    private $type_formations = [];
 
     /**
      * @ORM\Column(type="array")
@@ -98,7 +98,6 @@ class Formateur
 
     public function __construct()
     {
-        $this->evenementPlannings = new ArrayCollection();
         $this->formations = new ArrayCollection();
         $this->sessionFormations = new ArrayCollection();
     }
@@ -260,37 +259,6 @@ class Formateur
     public function setFormationIperia(array $formation_iperia): self
     {
         $this->formation_iperia = $formation_iperia;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|EvenementPlanning[]
-     */
-    public function getEvenementPlannings(): Collection
-    {
-        return $this->evenementPlannings;
-    }
-
-    public function addEvenementPlanning(EvenementPlanning $evenementPlanning): self
-    {
-        if (!$this->evenementPlannings->contains($evenementPlanning)) {
-            $this->evenementPlannings[] = $evenementPlanning;
-            $evenementPlanning->setFormateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvenementPlanning(EvenementPlanning $evenementPlanning): self
-    {
-        if ($this->evenementPlannings->contains($evenementPlanning)) {
-            $this->evenementPlannings->removeElement($evenementPlanning);
-            // set the owning side to null (unless already changed)
-            if ($evenementPlanning->getFormateur() === $this) {
-                $evenementPlanning->setFormateur(null);
-            }
-        }
 
         return $this;
     }
