@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ParentFacilitateur{% endblock %}
+
+{% block body %}
+    <h1>Edit ParentFacilitateur</h1>
+
+    {{ include('parent_facilitateur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('parent_facilitateur_index') }}">back to list</a>
+
+    {{ include('parent_facilitateur/_delete_form.html.twig') }}
+{% endblock %}

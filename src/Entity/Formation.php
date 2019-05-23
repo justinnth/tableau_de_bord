@@ -92,11 +92,6 @@ class Formation
     private $formateurs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EvenementPlanning", mappedBy="formation")
-     */
-    private $evenementPlannings;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $numero_cpf;
@@ -111,10 +106,15 @@ class Formation
      */
     private $descriptif;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SessionFormation", mappedBy="formation")
+     */
+    private $sessionFormations;
+
     public function __construct()
     {
         $this->formateurs = new ArrayCollection();
-        $this->evenementPlannings = new ArrayCollection();
+        $this->sessionFormations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -323,37 +323,6 @@ class Formation
         return $this;
     }
 
-    /**
-     * @return Collection|EvenementPlanning[]
-     */
-    public function getEvenementPlannings(): Collection
-    {
-        return $this->evenementPlannings;
-    }
-
-    public function addEvenementPlanning(EvenementPlanning $evenementPlanning): self
-    {
-        if (!$this->evenementPlannings->contains($evenementPlanning)) {
-            $this->evenementPlannings[] = $evenementPlanning;
-            $evenementPlanning->setFormation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvenementPlanning(EvenementPlanning $evenementPlanning): self
-    {
-        if ($this->evenementPlannings->contains($evenementPlanning)) {
-            $this->evenementPlannings->removeElement($evenementPlanning);
-            // set the owning side to null (unless already changed)
-            if ($evenementPlanning->getFormation() === $this) {
-                $evenementPlanning->setFormation(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getNumeroCpf(): ?int
     {
         return $this->numero_cpf;
@@ -379,6 +348,37 @@ class Formation
     public function setDescriptif(?string $descriptif): self
     {
         $this->descriptif = $descriptif;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SessionFormation[]
+     */
+    public function getSessionFormations(): Collection
+    {
+        return $this->sessionFormations;
+    }
+
+    public function addSessionFormation(SessionFormation $sessionFormation): self
+    {
+        if (!$this->sessionFormations->contains($sessionFormation)) {
+            $this->sessionFormations[] = $sessionFormation;
+            $sessionFormation->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSessionFormation(SessionFormation $sessionFormation): self
+    {
+        if ($this->sessionFormations->contains($sessionFormation)) {
+            $this->sessionFormations->removeElement($sessionFormation);
+            // set the owning side to null (unless already changed)
+            if ($sessionFormation->getFormation() === $this) {
+                $sessionFormation->setFormation(null);
+            }
+        }
 
         return $this;
     }

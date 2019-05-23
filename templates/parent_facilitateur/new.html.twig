@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ParentFacilitateur{% endblock %}
+
+{% block body %}
+    <h1>Create new ParentFacilitateur</h1>
+
+    {{ include('parent_facilitateur/_form.html.twig') }}
+
+    <a href="{{ path('parent_facilitateur_index') }}">back to list</a>
+{% endblock %}

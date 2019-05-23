@@ -87,19 +87,20 @@ class Formateur
     private $formation_iperia = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\EvenementPlanning", mappedBy="formateur")
-     */
-    private $evenementPlannings;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="formateurs")
      */
     private $formations;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\SessionFormation", mappedBy="formateurs")
+     */
+    private $sessionFormations;
 
     public function __construct()
     {
         $this->evenementPlannings = new ArrayCollection();
         $this->formations = new ArrayCollection();
+        $this->sessionFormations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -322,6 +323,34 @@ class Formateur
         if ($this->formations->contains($formation)) {
             $this->formations->removeElement($formation);
             $formation->removeFormateur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SessionFormation[]
+     */
+    public function getSessionFormations(): Collection
+    {
+        return $this->sessionFormations;
+    }
+
+    public function addSessionFormation(SessionFormation $sessionFormation): self
+    {
+        if (!$this->sessionFormations->contains($sessionFormation)) {
+            $this->sessionFormations[] = $sessionFormation;
+            $sessionFormation->addFormateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSessionFormation(SessionFormation $sessionFormation): self
+    {
+        if ($this->sessionFormations->contains($sessionFormation)) {
+            $this->sessionFormations->removeElement($sessionFormation);
+            $sessionFormation->removeFormateur($this);
         }
 
         return $this;

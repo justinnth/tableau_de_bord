@@ -3,7 +3,7 @@
 
 namespace App\EventListener;
 
-use App\Repository\EvenementPlanningRepository;
+use App\Repository\SessionFormationRepository;
 use CalendarBundle\Entity\Event;
 use CalendarBundle\Event\CalendarEvent;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -11,18 +11,18 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class CalendarListener
 {
     /**
-     * @var EvenementPlanningRepository
+     * @var SessionFormationRepository
      */
-    private $evenementPlanningRepository;
+    private $sessionFormationRepository;
     /**
      * @var UrlGeneratorInterface
      */
     private $router;
 
-    public function __construct(EvenementPlanningRepository $evenementPlanningRepository, UrlGeneratorInterface $router)
+    public function __construct(SessionFormationRepository $sessionFormationRepository, UrlGeneratorInterface $router)
     {
 
-        $this->evenementPlanningRepository = $evenementPlanningRepository;
+        $this->sessionFormationRepository = $sessionFormationRepository;
         $this->router = $router;
     }
 
@@ -32,37 +32,50 @@ class CalendarListener
         $end = $calendar->getEnd();
         $filters = $calendar->getFilters();
 
-        $evenements = $this->evenementPlanningRepository
-            ->createQueryBuilder('evenement_planning')
-            ->where('evenement_planning.beginAt BETWEEN :start and :end')
-            ->andWhere('evenement_planning.formateur = :formateur')
-            ->setParameter('start', $start->format('Y-m-d H:i:s'))
-            ->setParameter('end', $end->format('Y-m-d H:i:s'))
-            ->setParameter('formateur', $filters['formateur'])
-            ->getQuery()
-            ->getResult();
+        if ($filters['all']){
+            $evenements = $this->sessionFormationRepository
+                ->createQueryBuilder('session_formation')
+                ->where('session_formation.beginAt BETWEEN :start and :end')
+                ->setParameter('start', $start->format('Y-m-d H:i:s'))
+                ->setParameter('end', $end->format('Y-m-d H:i:s'))
+                ->getQuery()
+                ->getResult();
+        } else {
+            $evenements = $this->sessionFormationRepository
+                ->createQueryBuilder('session_formation')
+                ->where('session_formation.beginAt BETWEEN :start and :end')
+                ->andWhere('session_formation.formateur = :formateur')
+                ->setParameter('start', $start->format('Y-m-d H:i:s'))
+                ->setParameter('end', $end->format('Y-m-d H:i:s'))
+                ->setParameter('formateur', $filters['formateur'])
+                ->getQuery()
+                ->getResult();
+        }
 
         foreach ($evenements as $evenement){
 
-            $evenementPlanning = new Event(
+            $sessionFormation = new Event(
                 $evenement->getTitle(),
                 $evenement->getBeginAt(),
-                $evenement->getEndAt()
+                $evenement->getEndAt(),
+                [
+                    "formation" => $evenement->getFormation(), "formateurs" => $evenement->getFormateurs(), "participants" => $evenement->getParticipants(), "parentsFacilitateur" => $evenement->getParentsFacilitateurs()
+                ]
             );
 
-            $evenementPlanning->setOptions([
+            $sessionFormation->setOptions([
                 'backgroundColor' => 'red',
                 'borderColor' => 'red',
             ]);
 
-            $evenementPlanning->addOption(
+            $sessionFormation->addOption(
                 'url',
-                $this->router->generate('evenement_planning_show', [
+                $this->router->generate('session_formation_show', [
                     'id' => $evenement->getId(),
                 ])
             );
 
-            $calendar->addEvent($evenementPlanning);
+            $calendar->addEvent($sessionFormation);
         }
     }
 
