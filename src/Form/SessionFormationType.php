@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\SessionFormation;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,8 +21,16 @@ class SessionFormationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('beginAt')
-            ->add('endAt')
+            ->add('beginAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'attr' => ['class' => 'datetimepicker-input', 'data-target' => '#datetimepicker1'],
+                'html5' => false
+            ])
+            ->add('endAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'attr' => ['class' => 'datetimepicker-input', 'data-target' => '#datetimepicker1'],
+                'html5' => false
+            ])
             ->add('title')
             ->add('formation')
             ->add('formateurs')
