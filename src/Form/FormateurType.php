@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Formateur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,12 +24,17 @@ class FormateurType extends AbstractType
             ->add('fonction_actuelle')
             ->add('domaine_expertise')
             ->add('mode_acquisition')
-            ->add('type_formations')
-            ->add('zone_execution')
-            ->add('formation_iperia')
+            ->add('type_formations', CollectionType::class)
+            ->add('zone_execution', CollectionType::class, [
+                'entry_type' => NumberType::class
+            ])
+            ->add('formation_iperia', CollectionType::class, [
+                'entry_type' => NumberType::class
+            ])
             ->add('createdAt')
             ->add('updatedAt')
             ->add('formations')
+            ->add('sessionFormations')
         ;
     }
 
