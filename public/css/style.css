@@ -311,6 +311,11 @@ b{
     margin-bottom: 1em;
 }
 
+.liform{
+    border: solid 1px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
 
 
 /* Sticky footer styles
