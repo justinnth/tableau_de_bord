@@ -40,11 +40,23 @@ class CalendarListener
                 ->setParameter('end', $end->format('Y-m-d H:i:s'))
                 ->getQuery()
                 ->getResult();
+        } elseif (!empty($filters['formateur'])){
+            $evenements = $this->sessionFormationRepository
+                ->createQueryBuilder('S')
+                ->leftJoin('S.formateurs', 'SF')
+                ->where('S.beginAt BETWEEN :start and :end')
+                ->andWhere('SF.id = :formateur')
+                ->setParameter('start', $start->format('Y-m-d H:i:s'))
+                ->setParameter('end', $end->format('Y-m-d H:i:s'))
+                ->setParameter('formateur', $filters['formateur'])
+                ->getQuery()
+                ->getResult();
         } else {
             $evenements = $this->sessionFormationRepository
-                ->createQueryBuilder('session_formation')
-                ->where('session_formation.beginAt BETWEEN :start and :end')
-                ->andWhere('session_formation.formateur = :formateur')
+                ->createQueryBuilder('S')
+                ->leftJoin('S.formateurs', 'SF')
+                ->where('S.beginAt BETWEEN :start and :end')
+                ->andWhere('SF.id = :formateur')
                 ->setParameter('start', $start->format('Y-m-d H:i:s'))
                 ->setParameter('end', $end->format('Y-m-d H:i:s'))
                 ->setParameter('formateur', $filters['formateur'])

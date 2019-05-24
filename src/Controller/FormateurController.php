@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Formateur;
-use App\Form\Formateur1Type;
+use App\Form\FormateurType;
 use App\Repository\FormateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +17,8 @@ class FormateurController extends AbstractController
 {
     /**
      * @Route("/", name="formateur_index", methods={"GET"})
+     * @param FormateurRepository $formateurRepository
+     * @return Response
      */
     public function index(FormateurRepository $formateurRepository): Response
     {
@@ -27,11 +29,13 @@ class FormateurController extends AbstractController
 
     /**
      * @Route("/new", name="formateur_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
         $formateur = new Formateur();
-        $form = $this->createForm(Formateur1Type::class, $formateur);
+        $form = $this->createForm(FormateurType::class, $formateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -50,6 +54,8 @@ class FormateurController extends AbstractController
 
     /**
      * @Route("/{id}", name="formateur_show", methods={"GET"})
+     * @param Formateur $formateur
+     * @return Response
      */
     public function show(Formateur $formateur): Response
     {
@@ -60,10 +66,13 @@ class FormateurController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="formateur_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Formateur $formateur
+     * @return Response
      */
     public function edit(Request $request, Formateur $formateur): Response
     {
-        $form = $this->createForm(Formateur1Type::class, $formateur);
+        $form = $this->createForm(FormateurType::class, $formateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -82,6 +91,9 @@ class FormateurController extends AbstractController
 
     /**
      * @Route("/{id}", name="formateur_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Formateur $formateur
+     * @return Response
      */
     public function delete(Request $request, Formateur $formateur): Response
     {

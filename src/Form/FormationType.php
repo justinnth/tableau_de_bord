@@ -26,6 +26,8 @@ class FormationType extends AbstractType
             ->add('trameARealiser')
             ->add('trameValiderIperia')
             ->add('numero_cpf')
+            ->add('theme')
+            ->add('descriptif')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('formateurs')
