@@ -2,12 +2,10 @@
 
 namespace App\Form;
 
-use App\Entity\AssistanteMaternelle;
 use App\Entity\Formateur;
 use App\Entity\Formation;
 use App\Entity\SessionFormation;
 use App\Repository\FormateurRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -41,10 +39,7 @@ class SessionFormationType extends AbstractType
                 'class' => Formation::class,
                 'placeholder' => 'Coisir une formation...'
             ])
-            ->add('formateurs', EntityType::class, [
-                'class' => Formateur::class,
-                'choices' => $this->formateurRepository->findAll()
-            ])
+            ->add('formateurs')
             ->add('participants')
             ->add('parentsFacilitateurs');
     }
