@@ -2,8 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\AssistanteMaternelle;
+use App\Entity\Formateur;
+use App\Entity\Formation;
 use App\Entity\SessionFormation;
+use App\Repository\FormateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,11 +16,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SessionFormationType extends AbstractType
 {
-    private $em;
+    private $formateurRepository;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(FormateurRepository $formateurRepository)
     {
-        $this->em = $em;
+        $this->formateurRepository = $formateurRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -32,8 +37,14 @@ class SessionFormationType extends AbstractType
                 'html5' => false
             ])
             ->add('title')
-            ->add('formation')
-            ->add('formateurs')
+            ->add('formation', EntityType::class, [
+                'class' => Formation::class,
+                'placeholder' => 'Coisir une formation...'
+            ])
+            ->add('formateurs', EntityType::class, [
+                'class' => Formateur::class,
+                'choices' => $this->formateurRepository->findAll()
+            ])
             ->add('participants')
             ->add('parentsFacilitateurs');
     }
