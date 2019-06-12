@@ -99,6 +99,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "easycorp/easy-deploy-bundle": {
+        "version": "v1.0.5"
+    },
     "easycorp/easy-log-handler": {
         "version": "1.0",
         "recipe": {
@@ -240,6 +243,9 @@
     },
     "symfony/event-dispatcher": {
         "version": "v4.2.7"
+    },
+    "symfony/expression-language": {
+        "version": "v4.2.9"
     },
     "symfony/filesystem": {
         "version": "v4.2.7"

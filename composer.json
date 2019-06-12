@@ -73,6 +73,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "3.0.2",
+        "easycorp/easy-deploy-bundle": "^1.0",
         "easycorp/easy-log-handler": "^1.0.7",
         "fzaninotto/faker": "^1.8",
         "symfony/debug-bundle": "*",

@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Formateur;
 use App\Entity\Formation;
 use App\Entity\SessionFormation;
 use App\Repository\FormateurRepository;
